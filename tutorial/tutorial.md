@@ -1,317 +1,266 @@
 # Tutorial: How to create custome RAWGraph Chart.
-Here is a small Tutorial on how to create your own RAWGraphs Chart you first need to clone our repository
-## Setup
-```
-git clone git@gitlab.tugraz.at:95FD77DBCF078A32/rawgraphs-custom-charts.git
-```
-or the official template from RAWGraphs (https://github.com/rawgraphs/custom-rawcharts-template)
-```
-git clone git@github.com:rawgraphs/custom-rawcharts-template.git
-```
-Open the folder containing the repository:
-```
-cd <name-of-the-repo>
-```
-Install client-side dependencies:
-```
-npm install
-```
-You can now run the sandbox environment to test your charts:
-```
-npm run sandbox
-```
-After running the sandbox, you can look at the Live-Preview in your Browser under:
-```
-localhost:9000
-```
+This small Tutorial on how to create your own RAWGraphs Chart you first need to clone our repository
+## Prerequisits
+Follow the `Getting Started` instructions in the `README.md`.  
+
+Your folder structure should look like this:  
+📂 yourfolder  
+    └── 📁 `rawgraphs-custom-charts\`  
+
 ## Create your Chart
-Navigate to the `\src` folder.
 
-```
-cd \src
-```
-here you create a folder with the name of your chart
-```
-mkdir <your-chart-name>
-```
-after creating the folder you need to modify the `index.js` in the `\src` folder.
-The `index.js` will typically look something like in the example below, here you just need to add your chart.
+1. Navigate to the `src\` folder.
+    ```
+    cd src
+    ```
 
-```
-// index.js
-export { default as similaritymap } from './similaritymap'
-export { default as connectedscatterplot } from './connectedscatterplot'
-export { default as polarareadiagram } from './polarareadiagram'
+2. Add your chart to `src\index.js`.  
+    ```
+    // index.js
+    export { default as similaritymap } from './similaritymap'
+    export { default as connectedscatterplot } from './connectedscatterplot'
+    export { default as polarareadiagram } from './polarareadiagram'
 
-// add your chart
-export { default as <your-chart-name> } from './<your-chart-name>'
-```
-Now you can start adding the neccessary files to your `/<your-chart-name>` folder.
-For better readability we will use `chart` instead of `<your-chart-name>` for the example.
-```
-chart/
-├── chart_thumb.svg
-├── chart.js
-├── chart.svg
-├── dimensions.js
-├── index.js
-├── mapping.js
-├── metadata.js
-├── render.js
-└── visualOptions.js
-```
-The added files:
-- `chart_thumb.svg` is the SVG file for displaying the thumbnail of the chart on [RAWGraphs](https://app.rawgraphs.io/).
-- `chart.js` serves as the main module that ties together all the components of your custom chart.
-- `chart.svg` is the SVG displayed when selecting your custom chart on [RAWGraphs](https://app.rawgraphs.io/).
-- `dimensions.js` defines the dimensions and configuration of the data dimensions used in the chart. 
-- `index.js` acts as an entry point for your custom chart. It exports the main module of your chart, making it available for [RAWGraphs](https://app.rawgraphs.io/) to use.
-- `mapping.js` defines the data mapping rules for your chart. It specifies how the data from the RAWGraphs interface should be mapped to the chart's dimensions and elements, transforming the input data into a format suitable for rendering.
-- `metadata.js` This file contains metadata about your custom chart, such as its name, description, author, and other relevant information. It also includes details about the data dimensions and mapping options supported by the chart.
-- `render.js` is responsible for the actual rendering of the chart. 
-- `visualOptions.js` defines the visual options and customization settings for your chart. It specifies the various visual parameters (such as colors, sizes, and styles) that users can adjust to customize the appearance of the chart.
+    // add your chart
+    export { default as <your-chart-name> } from './<your-chart-name>'
+    ```
 
-In the section below [File Examples](#file-examples) you can find code samples on how the basic structure of the files should look like.
+3. Create a new folder with the name of your chart in `src\`
+    ```
+    mkdir <your-chart-name>
+    ```
+
+**For the sake of this tutorial, `<your-chart-name>` will be abbreviated as `yourChart`.**
+
+4. Create neccessary files
+
+    📂 yourChart  
+        ├── 📁 `yourChart_thumb.svg` thumbnail of the chart on [RAWGraphs](https://app.rawgraphs.io/)  
+        ├── 📁 `yourChart.js` main module that ties together all components of your chart  
+        ├── 📁 `yourChart.svg` SVG displayed when selecting your chart on [RAWGraphs](https://app.rawgraphs.io/)  
+        ├── 📁 `dimensions.js` defines the dimensions and configuration of the used dataset  
+        ├── 📁 `index.js` entry point of chart → exports the main module of your chart for [RAWGraphs](https://app.rawgraphs.io/)  
+        ├── 📁 `mapping.js` transforms the input data into a format suitable for rendering  
+        ├── 📁 `metadata.js` contains metadata about the chart (name, description, author etc.)  
+        ├── 📁 `render.js` responsible for actual rendering of the chart  
+        └── 📁 `visualOptions.js` defines the visual options and customization settings 
 
 
-After all of that your folder structure should look something like this
-```
-project-root/
-├── README.md
-├── src/
-│   ├── <your-chart-name>
-│   |   ├── <your-chart-name>_thumb.svg
-│   |   ├── <your-chart-name>.js 
-│   |   ├── ...
-│   |   └── visualOptions.js
-│   ├── other-chart
-│   ├── ...
-│   └── index.js
-```
-## Hint
-If you want a more detailed look into the files, clone the  the [rawgraphs-charts repository](https://github.com/rawgraphs/rawgraphs-charts) and look at their example charts and all of their files under `\src`.
-```
-git clone git@github.com:rawgraphs/rawgraphs-charts.git
-```
-## File Examples
-Remember for better readability we use `chart` instead of `<your-chart-name>`.
+5. Populate the files  
+**These are just highlevel examples, how the files could look like. If you need more details, please refer to the [rawgraphs-charts repository](https://github.com/rawgraphs/rawgraphs-charts).**
 
-Keep in mind, that you need to replace `chart` with `<your-chart-name>` for your own custom chart.
+    **myChart.js**
+    ```
+    import { metadata } from './metadata'
+    import { dimensions } from './dimensions'
+    import { mapData } from './mapping'
+    import { render } from './render'
+    import { visualOptions } from './visualOptions'
+    import styles from '../styles/base.raw.css'
 
+    export default {
+      metadata,
+      dimensions,
+      mapData,
+      render,
+      visualOptions,
+      styles,
+    }
+    ```
+    **dimensions.js**
+    ```
+    export const dimensions = [
+      {
+        id: 'x',
+        name: 'Left Side',
+        validTypes: ['number'],
+        required: true,
+      },
+      {
+        id: 'y',
+        name: 'Y axis',
+        validTypes: ['number', 'string', 'date'],
+        required: true,
+      }
+    ]
+    ```
+    **index.js**
+    ```
+    export { default } from './myChart'
+    ```
+    **mapping.js**
+    ```
+    export const mapData = {
+      x: 'get',
+      y: 'get'
+    }
+    ```
+    **metadata.js**
+    ```
+    import icon from './myChart.svg'
+    import thumbnail from './myChart_thumb.svg'
 
+    export const metadata = {
+      name: 'Your Custom Chart',
+      id: 'rawgraphs.chart',
+      thumbnail,
+      icon,
+      categories: ['Correlations', 'Comparison', ...],
+      description:
+        'this is a description',
+      code: '...',
+      tutorial: '...',
+    }
+    ```
+    **render.js**
+    ```
+    import * as d3 from 'd3'
+    import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
+    import '../d3-styles.js'
 
-### chart.js
-```
-import { metadata } from './metadata'
-import { dimensions } from './dimensions'
-import { mapData } from './mapping'
-import { render } from './render'
-import { visualOptions } from './visualOptions'
-import styles from '../styles/base.raw.css'
+    export function render(
+      svgNode,
+      data,
+      visualOptions,
+      mapping,
+      originalData,
+      styles
+    ) {
+        // JavaScript Code for Visualisation
+    }
+    ```
+    **visualOptions.js**
+    ```
+    export const visualOptions = {
+        marginTop: {
+        type: 'number',
+        label: 'Margin (top)',
+        default: 10,
+        group: 'artboard',
+      },
 
-export default {
-  metadata,
-  dimensions,
-  mapData,
-  render,
-  visualOptions,
-  styles,
-}
-```
-### dimensions.js
-```
-export const dimensions = [
-  {
-    id: 'x',
-    name: 'Left Side',
-    validTypes: ['number'],
-    required: true,
-  },
-  {
-    id: 'y',
-    name: 'Y axis',
-    validTypes: ['number', 'string', 'date'],
-    required: true,
-  }
-]
-```
-### index.js
-```
-export { default } from './chart'
-```
-### mapping.js
-```
-export const mapData = {
-  x: 'get',
-  y: 'get'
-}
-```
-### metadata.js
-```
-import icon from './chart.svg'
-import thumbnail from './chart_thumb.svg'
+      marginRight: {
+        type: 'number',
+        label: 'Margin (right)',
+        default: 10,
+        group: 'artboard',
+      },
 
-export const metadata = {
-  name: 'Your Custom Chart',
-  id: 'rawgraphs.chart',
-  thumbnail,
-  icon,
-  categories: ['Correlations', 'Comparison', ...],
-  description:
-    'this is a description',
-  code: '...',
-  tutorial: '...',
-}
-```
-### render.js
-```
-import * as d3 from 'd3'
-import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
-import '../d3-styles.js'
+      marginBottom: {
+        type: 'number',
+        label: 'Margin (bottom)',
+        default: 10,
+        group: 'artboard',
+      },
 
-export function render(
-  svgNode,
-  data,
-  visualOptions,
-  mapping,
-  originalData,
-  styles
-) {
-    // JavaScript Code for Visualisation
-}
-```
-### visualOptions.js
-```
-export const visualOptions = {
-    marginTop: {
-    type: 'number',
-    label: 'Margin (top)',
-    default: 10,
-    group: 'artboard',
-  },
+      marginLeft: {
+        type: 'number',
+        label: 'Margin (left)',
+        default: 10,
+        group: 'artboard',
+      },
 
-  marginRight: {
-    type: 'number',
-    label: 'Margin (right)',
-    default: 10,
-    group: 'artboard',
-  },
+      showLegend: {
+        type: 'boolean',
+        label: 'Show legend',
+        default: false,
+        group: 'artboard',
+      },
 
-  marginBottom: {
-    type: 'number',
-    label: 'Margin (bottom)',
-    default: 10,
-    group: 'artboard',
-  },
+      // and many more ...
+    }
+    ```
 
-  marginLeft: {
-    type: 'number',
-    label: 'Margin (left)',
-    default: 10,
-    group: 'artboard',
-  },
-
-  showLegend: {
-    type: 'boolean',
-    label: 'Show legend',
-    default: false,
-    group: 'artboard',
-  },
-
-  // and many more ...
-}
-```
 ## Test your Chart
 
-After creating your own custom chart can test it in two different ways:
-- testing locally with Sandbox.
-- creating a build and test it on [RAWGraphs](https://app.rawgraphs.io/).
----
-### Build and test it on [RAWGraphs](https://app.rawgraphs.io/)
-When you are satisfied with your project, you can build the js bundle to be used in the RAWGraphs interface.
+There are two ways, to test your chart:
 
-In terminal navigate the folder in wich you cloned this template and run:
-```
-npm run build
-```
-This will generate a folder named lib in which you will find three files.
+## Recommended: Run project locally with the RAWGraphs app
 
-The one named `index.umd.js` is the bundle that can be loaded by RAWGraphs as described in the section [Creating a Build](rawgraphs-custom-charts\README.md#Creating-a-Build).
+### RawGraphs
 
----
-### Test with Sandbox
-To test your chart with your local [Sanbox](http://localhost:9000) you need to follow the following steps.
+1. Clone the git repository:
+    ```
+    git clone git@github.com:rawgraphs/rawgraphs-charts.git
+    ```
+2. Go to the repository folder:  
 
-First you need to find a `Dataset` that works for your custom chart.
+    📂 yourfolder  
+    ├── 📁 `rawgraphs-custom-charts\`  
+    └── 📁 `rawgraphs-charts\`  
 
-After acquiring your `Dataset` you need to go to the folder `\example` and create your testing-file.
-For consistency and readability reasons we use `chart` again instead of `<your-chart-name>`.
+    ```
+    cd rawgraphs-charts
+    ```
+3. Install dependencies:
+    ```
+    //if necessary
+    nvm install 18
+    nvm use 18
 
-Add the file `chart-test.js` to the folder `\example\configurations`.
+    npm install
+    yarn install
+    ```
+4. Create link:
+    ```
+    yarn link
+    ```
 
-Now the structure of `\example` shold look something like this:
-```
-project-root/
-├── ...
-├── example/
-│   ├── components
-│   ├── configurations
-│   |   ├── ...
-│   |   └── chart-test.js
-│   ├── datasets
-│   |   ├── ...
-│   |   └── <your-dataset>.csv 
-│   ├── App.js
-│   ├── index.css
-│   ├── index.html
-│   └── index.js
-```
+### RawGraphs App
 
-Now lets add the basic structure of your testing-file
-#### chart-test.js
-```
-// import your dataset
-import data from '../datasets/<your-dataset>.csv'
+1. Clone the git repository:
+    ```
+    git clone git@github.com:rawgraphs/rawgraphs-app.git
+    ```
 
-// import custom chart you created
-import chart from 'customcharts/chart'
+2. Go to the repository folder:
 
+    📂 yourfolder  
+    ├── 📁 `rawgraphs-custom-charts\`  
+    ├── 📁 `rawgraphs-charts\`  
+    └── 📁 `rawgraphs-app\`
 
-// this is just some example of a barchart, modify it as you see fit for your custom chart.
+    ```
+    cd rawgraphs-app
+    ```
 
-export default {
-  chart,
-  data,
-  dataTypes: {
-    Year: {
-      type: 'date',
-      dateFormat: 'YYYY',
-    },
-    Age: 'string',
-    Male: 'number',
-  },
-  mapping: {
-    x: { value: ['Male'] },,
-    y: { value: ['Age'] },
-  },
-  visualOptions: {
-    width: 800,
-    height: 600,
-    padding: 0,
-    labelLeftRotation: 45,
-    labelLeftAlignment: 'start',
-    background: 'white',
-    title: 'My title',
-  },
-}
-```
+3. Install dependencies:
+    ```
+    //if necessary
+    nvm install 18
+    nvm use 18
 
-After creating your testing-file you can run the following command in the `root` of your repository/project.
-```
-npm run sandbox
-```
-after the sandbox was started correctly you can look at the live preview of your testing-file in the browser of your choice under:
-```
-http://localhost:9000
-```
+    npm install
+    yarn install
+    ```
+4. Add link:
+    ```
+    yarn link "@rawgraphs/rawgraphs-charts"
+    ```
+5. Start RAWGraphs 
+    ```
+    npm run start
+    ```
+
+## Sandbox Environment
+1. Clone the git repository:
+    ```
+    git clone https://github.com/laurapessl/rawgraphs-custom-charts.git
+    ```
+2. Go to the repository folder
+    ```
+    cd rawgraphs-custom-charts
+    ```
+3. Install the client-side dependencies:
+    ```
+    npm install
+    ```
+4. Run the sandbox environment to test your charts:
+    ```
+    npm run sandbox
+    ```
+5. Check out the live preview under:
+    ```
+    localhost:9000
+    ```
 

@@ -1,91 +1,167 @@
-# IVIS - G1 - RAWGraphs custom charts
+# IVIS - G1 - RAWGraphs Custom Charts
 Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 
 (based on the previous work of Aumüller Thomas, Heider Martin, Ramadan Abdelrahman)
 
-## How to make it run
-First clone the git Repository:
-```
-git clone git@github.com:solidth/RAWGraphs-Custom-Charts.git
-```
-Browse the folder containing the repository:
-```
-cd rawgraphs-custom-charts
-```
-Install client-side dependencies:
-```
-npm install
-```
-You can now run the sandbox environment to test your charts:
-```
-npm run sandbox
-```
-After running the sandbox, you can look at the Live-Preview under:
-```
-localhost:9000
-```
+# Getting started
 
-## Build and testing locally in RAWGraphs app (local dev. Server)
-How to build and run a local development server for testing IVIS implementation.
+1. Clone the git repository:
+    ```
+    git clone https://github.com/laurapessl/rawgraphs-custom-charts.git
+    ```
+2. Go to the repository folder 
+    ```
+    cd rawgraphs-custom-charts
+    ```
+3. Install the client-side dependencies:
+    ```
+    npm install
+    ```
 
-Clone those two repositories and install their dependencies:
-```
-git clone git@github.com:rawgraphs/rawgraphs-charts.git
-git clone git@github.com:rawgraphs/rawgraphs-app.git
-```
-Open a terminal in the cloned `\rawgraphs-charts` folder and create a build with the command:
-```
-nvm install 14
+# Run the project
 
-// if needed 
-nvm use 14
+## Recommended: Run project locally with the RAWGraphs app
 
-yarn install
-npm install
+### RawGraphs
 
-npm run build
-```
-Then create a link with the command:
-```
-yarn link
-```
-Open a terminal in the cloned `\rawgraphs-app` folder:
-```
-yarn install
-npm install
-yarn link "@rawgraphs/rawgraphs-charts"
-```
-After that the local development server should be ready to go and you can test it locally by starting the app:
-```
-npm run start
-```
-# Creating a Build
+1. Clone the git repository:
+    ```
+    git clone git@github.com:rawgraphs/rawgraphs-charts.git
+    ```
+2. Go to the repository folder:  
+
+    📂 yourfolder  
+    ├── 📁 `rawgraphs-custom-charts\`  
+    └── 📁 `rawgraphs-charts\`  
+
+    ```
+    cd rawgraphs-charts
+    ```
+3. Install dependencies:
+    ```
+    //if necessary
+    nvm install 18
+    nvm use 18
+
+    npm install
+    yarn install
+    ```
+4. Create link:
+    ```
+    yarn link
+    ```
+
+### RawGraphs App
+
+1. Clone the git repository:
+    ```
+    git clone git@github.com:rawgraphs/rawgraphs-app.git
+    ```
+
+2. Go to the repository folder:
+
+    📂 yourfolder  
+    ├── 📁 `rawgraphs-custom-charts\`  
+    ├── 📁 `rawgraphs-charts\`  
+    └── 📁 `rawgraphs-app\`
+
+    ```
+    cd rawgraphs-app
+    ```
+
+3. Install dependencies:
+    ```
+    //if necessary
+    nvm install 18
+    nvm use 18
+
+    npm install
+    yarn install
+    ```
+4. Add link:
+    ```
+    yarn link "@rawgraphs/rawgraphs-charts"
+    ```
+5. Start RAWGraphs 
+    ```
+    npm run start
+    ```
+
+## Sandbox Environment
+1. Clone the git repository:
+    ```
+    git clone https://github.com/laurapessl/rawgraphs-custom-charts.git
+    ```
+2. Go to the repository folder
+    ```
+    cd rawgraphs-custom-charts
+    ```
+3. Install the client-side dependencies:
+    ```
+    npm install
+    ```
+4. Run the sandbox environment to test your charts:
+    ```
+    npm run sandbox
+    ```
+5. Check out the live preview under:
+    ```
+    localhost:9000
+    ```
+
+
+# Create a Bundle for RAWGraphs
 When you are satisfied with your project, you can build the js bundle to be used in the RAWGraphs interface.
 
-In terminal navigate the folder in wich you cloned this template and run:
-```
-npm run build
-```
-This will generate a folder named lib in which you will find three files.
+1. Go to the repository:
 
-The one named `index.umd.js` is the bundle that can be loaded by RAWGraphs. This file can be renamed.
+    📂 yourfolder  
+        ├── 📁 `rawgraphs-custom-charts\`  
+        ├── 📁 `rawgraphs-charts\`  
+        └── 📁 `rawgraphs-app\`
 
-# Loading a Build
-After you created a build and have the `index.umd.js` file or `<name>.umd.js` file you can go to your `development server`.
-1. Load your data.
-2. Click `Try our data samples`.
+    ```
+    cd rawgraphs-custom-charts
+    ```
+2. Build the project
+    ```
+    npm run build
+    ```
+3. This will generate a folder named `lib\` in `rawgraphs-charts\`, in which you will find three files:
+
+    📂 yourfolder  
+        ├── 📁 `rawgraphs-custom-charts\`    
+        ├── 📁 `rawgraphs-charts\`  
+        <span style="color: transparent;">├──</span>└── 📁 `lib\`  
+        <span style="color: transparent;">├──├──</span>├── `index.cjs.js`  
+        <span style="color: transparent;">├──├──</span>├── `index.es.js`  
+        <span style="color: transparent;">├──├──</span>└── `index.umd.js`  
+        └── 📁 `rawgraphs-app\`
+
+    The `index.umd.js` file can now be loaded with RAWGraphs.  
+    Recommended: Rename file to chart name → e.g. `bar-chart.umd.js`
+
+# Upload the bundle to RAWGraphs
+The following steps can be executed on the local RAWGraphs app, as well as on https://app.rawgraphs.io.
+
+1. Load your your data  
+    Either upload your own dataset, or chose a dataset from `Try our data samples` 
 
 ![Try our data samples](images/datasample.png)
 
-3. In `Choose a chart` go to `Add your chart!`.
+3. Choose a chart  
+    At the end of the section, choose `Load custom chart!` 
 
-![Add your chart](images/addyourchart.png)
+![Load custom chart](images/addyourchart.png)
 
-4. Here drag or select your `index.umd.js` file or `<name>.umd.js` file.
+4. Load custom chart  
+     Select your `<name>.umd.js` file.
 
-![select your file](images/addcustomechart.png)
+![select your file](images/addcustomchart.png)
 
 ---
+
+# Troubleshooting
 ## Problems with `npm run sandbox`
 Commands that may fix some of the Node.js errors when trying to run `npm run sandbox`.
 ```
@@ -99,16 +175,16 @@ yarn install
 npm install
 ```
 ### Changes to run Similarity Map in Sandbox
-- added `src/similaritymap`.
-- added `src/styles/base.raw.css`.
-- added `src/index.html`: 
+- added `src\similaritymap`.
+- added `src\styles\base.raw.css`.
+- added `src\index.html`: 
   - export { default as similaritymap } from './similaritymap'
-- added `src/tsne.js`.
+- added `src\tsne.js`.
     - (for later <b>UMAP</b> und <b>PCA</b>)
-- added `datasets/fake-multiset.tsv`.
-- added `example/configurations/similaritymap-test.js`.
-- added `example/configurations/similaritymap-test.js`:
-  - import chart from `customcharts/similaritymap`
+- added `datasets\fake-multiset.tsv`.
+- added `example\configurations\similaritymap-test.js`.
+- added `example\configurations\similaritymap-test.js`:
+  - import chart from `customcharts\similaritymap`
 
 
 ### What is `.rawgraphs`
@@ -132,6 +208,11 @@ If you'd like to contribute, follow the RAWGraphs [custom template guide](https:
 
 ## Credits
 
+
+Supervisor: [@kandrews99](https://github.com/kandrews99).
+
 Original code and template for Similarity Map by [@blindguardian50](https://github.com/blindguardian50) [@steve1711](https://github.com/steve1711), [@TheAlmightySpaceWarrior](https://github.com/TheAlmightySpaceWarrior), [@wizardry8](https://github.com/wizardry8).
 
-Final implementation of Similarity Map and original code for  Connected Scatterplot, Polar Area Diagram by [@solidth](https://github.com/solidth), [@hezojez](https://github.com/hezojez) and [@Ramadan877](https://github.com/Ramadan877) under the supervision of [@kandrews99](https://github.com/kandrews99)
+Final implementation of Similarity Map and original code for  Connected Scatterplot, Polar Area Diagram by [@solidth](https://github.com/solidth), [@hezojez](https://github.com/hezojez) and [@Ramadan877](https://github.com/Ramadan877).
+
+Extensions added to Connected Scatterplot, Similarity Map and finalization of Polar Area Diagram as well as implementation of Bullet and Pareto Chart by [@bkandlbauer](https://github.com/bkandlbauer), [@theplanetarpelican](https://github.com/theplanetarpelican) and [@laurapessl](https://github.com/laurapessl).
