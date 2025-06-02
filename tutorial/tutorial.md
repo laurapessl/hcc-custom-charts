@@ -1,5 +1,6 @@
 # Tutorial: How to create custome RAWGraph Chart.
-This small Tutorial on how to create your own RAWGraphs Chart you first need to clone our repository
+This is a short tutorial on how to create your own RAWGraphs chart.  
+
 ## Prerequisits
 Follow the `Getting Started` instructions in the `README.md`.  
 
@@ -9,12 +10,12 @@ Your folder structure should look like this:
 
 ## Create your Chart
 
-1. Navigate to the `src\` folder.
+1. Navigate to the `src\` folder:  
     ```
     cd src
     ```
 
-2. Add your chart to `src\index.js`.  
+2. Add your chart to `src\index.js`:  
     ```
     // index.js
     export { default as similaritymap } from './similaritymap'
@@ -25,14 +26,14 @@ Your folder structure should look like this:
     export { default as <your-chart-name> } from './<your-chart-name>'
     ```
 
-3. Create a new folder with the name of your chart in `src\`
+3. Create a new folder with the name of your chart in `src\`:
     ```
     mkdir <your-chart-name>
     ```
 
 **For the sake of this tutorial, `<your-chart-name>` will be abbreviated as `yourChart`.**
 
-4. Create neccessary files
+4. Create neccessary files:
 
     📂 yourChart  
         ├── 📁 `yourChart_thumb.svg` thumbnail of the chart on [RAWGraphs](https://app.rawgraphs.io/)  
@@ -46,7 +47,7 @@ Your folder structure should look like this:
         └── 📁 `visualOptions.js` defines the visual options and customization settings 
 
 
-5. Populate the files  
+5. Populate the files:  
 **These are just highlevel examples, how the files could look like. If you need more details, please refer to the [rawgraphs-charts repository](https://github.com/rawgraphs/rawgraphs-charts).**
 
     **myChart.js**

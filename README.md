@@ -111,7 +111,7 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 
 
 # Create a Bundle for RAWGraphs
-When you are satisfied with your project, you can build the js bundle to be used in the RAWGraphs interface.
+If you are satisfied with your project, you can build the JavaScript bundle to be used in the RAWGraphs interface.
 
 1. Go to the repository:
 
@@ -150,7 +150,7 @@ The following steps can be executed on the local RAWGraphs app, as well as on ht
 ![Try our data samples](images/datasample.png)
 
 3. Choose a chart  
-    At the end of the section, choose `Load custom chart!` 
+    At the end of the section, choose `Load custom chart` 
 
 ![Load custom chart](images/addyourchart.png)
 
