@@ -70,11 +70,11 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
     ```
 4. Add link:
     ```
-    yarn link "@rawgraphs/rawgraphs-charts"
+    yarn link "@rawgraphs/hcc-custom-charts"
     ```
 5. Start RAWGraphs 
     ```
-    npm run start
+    yarn run start
     ```
 
 ## Sandbox Environment
@@ -152,8 +152,16 @@ The following steps can be executed on the local RAWGraphs app, as well as on ht
 ---
 
 # Troubleshooting
+## Probems with `yarn install`
+If you get the error `error @testing-library/dom@10.4.0: The engine "node" is incompatible with this module. Expected version ">=18". Got "16.20.2"` try installing a newer version (>= 18) of node the following:
+
+```
+nvm install 22
+nvm use 22
+```
+
 ## Problems with `npm run sandbox`
-Commands that may fix some of the Node.js errors when trying to run `npm run sandbox`.
+Commands that may fix some of the Node.js errors when trying to run .
 ```
 npm install dsv-loader --save-dev
 npx browserslist@latest --update-db
