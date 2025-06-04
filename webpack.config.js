@@ -62,7 +62,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      customcharts: path.resolve(__dirname, 'src'),
+      rawcharts: path.resolve(__dirname, 'src'),
     },
   },
 }

@@ -22,26 +22,17 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 
 ## Recommended: Run project locally with the RAWGraphs app
 
-### RawGraphs
+### Create Link
 
-1. Clone the git repository:
-    ```
-    git clone git@github.com:rawgraphs/rawgraphs-charts.git
-    ```
-2. Go to the repository folder:  
+1. Go to the repository folder:  
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts/`  
-    └── 📁 `rawgraphs-charts/`  
+    └── 📁 `rawgraphs-custom-charts/`  
 
     ```
-    cd rawgraphs-charts
+    cd rawgraphs-custom-charts
     ```
-3. Install dependencies:
-    ```
-    yarn install
-    ```
-4. Create link:
+2. Create link:
     ```
     yarn link
     ```
@@ -57,7 +48,6 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 
     📂 yourfolder  
     ├── 📁 `rawgraphs-custom-charts/`  
-    ├── 📁 `rawgraphs-charts/`  
     └── 📁 `rawgraphs-app/`
 
     ```
@@ -106,8 +96,7 @@ If you are satisfied with your project, you can build the JavaScript bundle to b
 1. Go to the repository:
 
     📂 yourfolder  
-        ├── 📁 `rawgraphs-custom-charts/`  
-        ├── 📁 `rawgraphs-charts/`  
+        ├── 📁 `rawgraphs-custom-charts/`   
         └── 📁 `rawgraphs-app/`
 
     ```
@@ -115,7 +104,7 @@ If you are satisfied with your project, you can build the JavaScript bundle to b
     ```
 2. Build the project
     ```
-    yarn run build
+    yarn build
     ```
 3. This will generate a folder named `lib/` in `rawgraphs-charts/`, in which you will find three files:
 

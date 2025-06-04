@@ -1,4 +1,3 @@
-import replace from '@rollup/plugin-replace'
 import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import localResolve from 'rollup-plugin-local-resolve'
@@ -18,8 +17,6 @@ const vendors = []
   )
   .concat('./styles/base.css')
 
-const GlobalVendors = ['d3', '@rawgraphs/rawgraphs-core']
-
 const makeExternalPredicate = (externalArr) => {
   if (externalArr.length === 0) {
     return () => false
@@ -37,37 +34,29 @@ export default ['esm', 'cjs', 'umd'].map((format) => ({
       dir: 'lib',
       entryFileNames: '[name].[format].js',
       exports: 'named',
-      name: 'myAwsesomeCharts',
+      name: 'rawcharts',
       format,
-      globals: {
-        '@rawgraphs/rawgraphs-core': 'rawgraphsCore',
-        d3: 'd3',
-      },
     },
   ],
-  external: makeExternalPredicate(format === 'umd' ? GlobalVendors : vendors),
+  external: format === 'umd' ? undefined : makeExternalPredicate(vendors),
   plugins: [
-    replace({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      preventAssignment: true,
-    }),
     localResolve(),
-    commonjs({ include: /node_modules/ }),
+    commonjs(),
+    image(),
     babel({
       exclude: 'node_modules/**',
+      // TODO: Maybe check this
       babelHelpers: 'bundled',
-      presets: ['@babel/preset-env', '@babel/preset-react'],
     }),
-    image(),
     rawGraphCss({
-      include: '**/*.raw.css',
+      include: '**/styles/*.raw.css',
     }),
     string({
-      include: '**/*.css',
-      exclude: '**/*.raw.css',
+      include: '**/styles/*.css',
+      exclude: '**/styles/*.raw.css',
     }),
   ].concat(
-    format === 'umd'
+    format == 'umd'
       ? [
           resolve(),
           terser()
