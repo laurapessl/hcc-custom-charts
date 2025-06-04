@@ -6,16 +6,16 @@ Follow the `Getting Started` instructions in the `README.md`.
 
 Your folder structure should look like this:  
 📂 yourfolder  
-    └── 📁 `rawgraphs-custom-charts\`  
+    └── 📁 `rawgraphs-custom-charts/`  
 
 ## Create your Chart
 
-1. Navigate to the `src\` folder:  
+1. Navigate to the `src/` folder:  
     ```
     cd src
     ```
 
-2. Add your chart to `src\index.js`:  
+2. Add your chart to `src/index.js`:  
     ```
     // index.js
     export { default as similaritymap } from './similaritymap'
@@ -26,7 +26,7 @@ Your folder structure should look like this:
     export { default as <your-chart-name> } from './<your-chart-name>'
     ```
 
-3. Create a new folder with the name of your chart in `src\`:
+3. Create a new folder with the name of your chart in `src/`:
     ```
     mkdir <your-chart-name>
     ```
@@ -187,8 +187,8 @@ There are two ways, to test your chart:
 2. Go to the repository folder:  
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts\`  
-    └── 📁 `rawgraphs-charts\`  
+    ├── 📁 `rawgraphs-custom-charts/`  
+    └── 📁 `rawgraphs-charts/`  
 
     ```
     cd rawgraphs-charts
@@ -217,9 +217,9 @@ There are two ways, to test your chart:
 2. Go to the repository folder:
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts\`  
-    ├── 📁 `rawgraphs-charts\`  
-    └── 📁 `rawgraphs-app\`
+    ├── 📁 `rawgraphs-custom-charts/`  
+    ├── 📁 `rawgraphs-charts/`  
+    └── 📁 `rawgraphs-app/`
 
     ```
     cd rawgraphs-app

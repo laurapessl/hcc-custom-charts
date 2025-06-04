@@ -15,7 +15,7 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
     ```
 3. Install the client-side dependencies:
     ```
-    npm install
+    yarn install
     ```
 
 # Run the project
@@ -31,19 +31,14 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 2. Go to the repository folder:  
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts\`  
-    └── 📁 `rawgraphs-charts\`  
+    ├── 📁 `rawgraphs-custom-charts/`  
+    └── 📁 `rawgraphs-charts/`  
 
     ```
     cd rawgraphs-charts
     ```
 3. Install dependencies:
     ```
-    //if necessary
-    nvm install 18
-    nvm use 18
-
-    npm install
     yarn install
     ```
 4. Create link:
@@ -61,9 +56,9 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 2. Go to the repository folder:
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts\`  
-    ├── 📁 `rawgraphs-charts\`  
-    └── 📁 `rawgraphs-app\`
+    ├── 📁 `rawgraphs-custom-charts/`  
+    ├── 📁 `rawgraphs-charts/`  
+    └── 📁 `rawgraphs-app/`
 
     ```
     cd rawgraphs-app
@@ -71,11 +66,6 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 
 3. Install dependencies:
     ```
-    //if necessary
-    nvm install 18
-    nvm use 18
-
-    npm install
     yarn install
     ```
 4. Add link:
@@ -98,7 +88,7 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
     ```
 3. Install the client-side dependencies:
     ```
-    npm install
+    yarn install
     ```
 4. Run the sandbox environment to test your charts:
     ```
@@ -116,27 +106,27 @@ If you are satisfied with your project, you can build the JavaScript bundle to b
 1. Go to the repository:
 
     📂 yourfolder  
-        ├── 📁 `rawgraphs-custom-charts\`  
-        ├── 📁 `rawgraphs-charts\`  
-        └── 📁 `rawgraphs-app\`
+        ├── 📁 `rawgraphs-custom-charts/`  
+        ├── 📁 `rawgraphs-charts/`  
+        └── 📁 `rawgraphs-app/`
 
     ```
     cd rawgraphs-custom-charts
     ```
 2. Build the project
     ```
-    npm run build
+    yarn run build
     ```
-3. This will generate a folder named `lib\` in `rawgraphs-charts\`, in which you will find three files:
+3. This will generate a folder named `lib/` in `rawgraphs-charts/`, in which you will find three files:
 
     📂 yourfolder  
-        ├── 📁 `rawgraphs-custom-charts\`    
-        ├── 📁 `rawgraphs-charts\`  
-        <span style="color: transparent;">├──</span>└── 📁 `lib\`  
+        ├── 📁 `rawgraphs-custom-charts/`    
+        ├── 📁 `rawgraphs-charts/`  
+        <span style="color: transparent;">├──</span>└── 📁 `lib/`  
         <span style="color: transparent;">├──├──</span>├── `index.cjs.js`  
         <span style="color: transparent;">├──├──</span>├── `index.es.js`  
         <span style="color: transparent;">├──├──</span>└── `index.umd.js`  
-        └── 📁 `rawgraphs-app\`
+        └── 📁 `rawgraphs-app/`
 
     The `index.umd.js` file can now be loaded with RAWGraphs.  
     Recommended: Rename file to chart name → e.g. `bar-chart.umd.js`
@@ -175,16 +165,16 @@ yarn install
 npm install
 ```
 ### Changes to run Similarity Map in Sandbox
-- added `src\similaritymap`.
-- added `src\styles\base.raw.css`.
-- added `src\index.html`: 
+- added `src/similaritymap`.
+- added `src/styles/base.raw.css`.
+- added `src/index.html`: 
   - export { default as similaritymap } from './similaritymap'
-- added `src\tsne.js`.
+- added `src/tsne.js`.
     - (for later <b>UMAP</b> und <b>PCA</b>)
-- added `datasets\fake-multiset.tsv`.
-- added `example\configurations\similaritymap-test.js`.
-- added `example\configurations\similaritymap-test.js`:
-  - import chart from `customcharts\similaritymap`
+- added `datasets/fake-multiset.tsv`.
+- added `example/configurations/similaritymap-test.js`.
+- added `example/configurations/similaritymap-test.js`:
+  - import chart from `customcharts/similaritymap`
 
 
 ### What is `.rawgraphs`
@@ -200,7 +190,7 @@ JSON-based format that allows users to save and later reload their projects.
 
 ## Tutorial
 
-A small tutorial can be found [here](tutorial/tutorial.md) in the folder  `tutorial\tutorial.md`
+A small tutorial can be found [here](tutorial/tutorial.md) in the folder  `tutorial/tutorial.md`
 
 ## Contribute
 
