@@ -152,6 +152,7 @@ nvm use 22
 ## Problems with `npm run sandbox`
 Commands that may fix some of the Node.js errors when trying to run .
 ```
+yarn add ml-pca umap-js
 npm install dsv-loader --save-dev
 npx browserslist@latest --update-db
 ```
