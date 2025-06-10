@@ -116,8 +116,7 @@ If you are satisfied with your project, you can build the JavaScript bundle to b
         <span style="color: transparent;">├──├──</span>└── `hcc-custom-charts.umd.js`  
         └── 📁 `rawgraphs-app/`
 
-    The `index.umd.js` file can now be loaded with RAWGraphs.  
-    Recommended: Rename file to chart name → e.g. `bar-chart.umd.js`
+    The `hcc-custom-charts.umd.js` file can now be loaded with RAWGraphs.  
 
 # Upload the bundle to RAWGraphs
 The following steps can be executed on the local RAWGraphs app, as well as on https://app.rawgraphs.io.

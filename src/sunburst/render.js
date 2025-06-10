@@ -1,7 +1,7 @@
 import { rollup } from 'd3-array';
 import { select } from 'd3-selection';
-import { hierarchy, partition } from 'd3-hierarchy';
-import { arc } from 'd3-shape';
+import { hierarchy as d3Hierarchy, partition as d3Partition } from 'd3-hierarchy';
+import { arc as d3Arc } from 'd3-shape';
 import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
@@ -66,18 +66,18 @@ export function render(
   )
 
   const hierarchy =
-    hierarchy(nest)
+  d3Hierarchy(nest)
     .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have also a .size porperty, sum only values for leaves, and not for Maps
   //@TODO: find a way to filter hierarchy
 
   const partition = (nest) =>
-      partition() // copied from example of d3v6, not clear the meaning
+    d3Partition() // copied from example of d3v6, not clear the meaning
       .size([2 * Math.PI, radius])(hierarchy)
 
-  const root = partition(nest)
+  const root = d3Partition(nest)
 
   const arc =
-    arc()
+  d3Arc()
     .startAngle((d) => d.x0)
     .endAngle((d) => d.x1)
     .padAngle(padding / (radius / 2)) // convert padding in radians

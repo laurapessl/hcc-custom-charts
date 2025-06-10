@@ -1,8 +1,7 @@
-import { select } from 'd3-selection';
+import { select as d3Select } from 'd3-selection';
 import { extent, descending, ascending, sum, rollups } from 'd3-array';
 import { axisLeft, axisBottom } from 'd3-axis';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
 export function render(
@@ -59,7 +58,7 @@ export function render(
     barsDomain,
   } = calcProps()
 
-  const svg = select(node)
+  const svg = d3Select(node)
   const bounds = createBounds()
   const { x1Scale, x2Scale, x1ScaleReverse, yScale } = createScales()
   const { x1Axis, x2Axis, yAxis } = createAxes()
@@ -217,7 +216,7 @@ export function render(
         .append('text')
         .text(axisLeftLabel ? axisLeftLabel : mapping.x1.value)
         .attr('dx', x1)
-        .styles(styles.axisLabel)
+        .attr('class', 'axisLabel') //instead of .styles(styles.axisLabel)
 
       labelX1.attr(
         'transform',
@@ -231,7 +230,7 @@ export function render(
         .append('text')
         .text(axisRightLabel ? axisRightLabel : mapping.x2.value)
         .attr('dx', x2 + widthX2)
-        .styles(styles.axisLabel)
+        .attr('class', 'axisLabel') //instead of .styles(styles.axisLabel)
 
       labelX2.attr(
         'transform',
@@ -243,7 +242,7 @@ export function render(
       labelY = yAxis
         .append('text')
         .text(axisVerticalLabel ? axisVerticalLabel : mapping.y.value)
-        .styles(styles.axisLabel)
+        .attr('class', 'axisLabel') //instead of .styles(styles.axisLabel)
 
       labelY.attr(
         'transform',

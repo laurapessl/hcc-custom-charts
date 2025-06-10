@@ -1,6 +1,6 @@
 import { select } from 'd3-selection';
-import { pie, arc } from 'd3-shape';
-import { max } from 'd3-array';
+import { pie as d3Pie, arc as d3Arc} from 'd3-shape';
+import { max as d3Max } from 'd3-array';
 import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core';
 import '../d3-styles.js';
 
@@ -72,22 +72,22 @@ export function render(
     .attr('id', 'viz');
 
   // Create the pie layout
-  const pie = pie()
+  const pie = d3Pie()
     .startAngle(rotation)
     .endAngle(Math.PI*2 + rotation)
     .value(1)
     .sort(null);
 
   // Map data for pie chart
-  const pieData = pie(data);
-  const max_rad = max(data, d => d.size) / data.length;
+  const pieData = d3Pie(data);
+  const max_rad = d3Max(data, d => d.size) / data.length;
   console.log(pieData)
   console.log(max_rad)
 
   // Create the arc
-  const arc = arc()
+  const arc = d3Arc()
     .innerRadius(0)
-    .outerRadius(d => radius * (d.data.size / max(data, d => d.size)) + padding*5);
+    .outerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + padding*5);
 
   console.log(arc)
 
@@ -110,9 +110,9 @@ export function render(
     });
 
   // Create the arc for label placement
-  const labelArc = arc()
-    .innerRadius(d => radius * (d.data.size / max(data, d => d.size)) + 10) // Adjust 10 to control distance from the arc
-    .outerRadius(d => radius * (d.data.size / max(data, d => d.size)) + 10);
+  const labelArc = d3Arc()
+    .innerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + 10) // Adjust 10 to control distance from the arc
+    .outerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + 10);
 
   // Add hidden labels initially
   const textGroups = chartGroup.selectAll('text')
@@ -142,7 +142,7 @@ export function render(
   } 
 
   if (showLabelsOutline) {
-    textGroups.styles(styles.labelOutline);
+    textGroups.attr('class', 'labelOutline'); //instead of .styles(styles.labelOutline)
   }
 
   if (autoHideLabels) {

@@ -3,7 +3,7 @@ import { select } from 'd3-selection';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { axisLeft, axisBottom } from 'd3-axis';
 import { timeFormat } from 'd3-time-format';
-import { line } from 'd3-shape';
+import { line as d3Line } from 'd3-shape';
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
@@ -184,7 +184,7 @@ export function render(
         .attr('y', 4)
         .attr('x', 4)
         .text((d) => d[0])
-        .styles(styles.seriesLabel)
+        .attr('class', 'seriesLabel') //instead of .styles(styles.seriesLabel)
     }
 
     // compute each series width and height
@@ -242,7 +242,7 @@ export function render(
             .attr('dy', -5)
             .attr('text-anchor', 'end')
             .text(mapping['x'].value)
-            .styles(styles.axisLabel)
+            .attr('class', 'axisLabel') //instead of .styles(styles.axisLabel)
         )
     }
 
@@ -257,7 +257,7 @@ export function render(
             .attr('text-anchor', 'start')
             .attr('dominant-baseline', 'hanging')
             .text(mapping['y'].value)
-            .styles(styles.axisLabel)
+            .attr('class', 'axisLabel') //instead of .styles(styles.axisLabel)
         )
     }
 
@@ -273,14 +273,14 @@ export function render(
     // add connection line
     if (mapping.connectedBy.value) {
       const line =
-        line()
+      d3Line()
         .x((d) => xScale(d.x))
         .y((d) => yScale(d.y))
 
       vizLayer
         .append('path')
         .attr('d', () =>
-          line(
+          d3Line(
             serieData.sort((a, b) => {
               return ascending(a.connectedBy, b.connectedBy)
             })
@@ -349,7 +349,7 @@ export function render(
           return d
         }
       })
-      .styles((d, i) => styles[labelStyles[i]])
+      .attr("class", (d, i) => styles[labelStyles[i]]) //instead of .styles((d, i) => styles[labelStyles[i]])
 
     // center labels position
     labelsLayer.selectAll('text').call((sel) => {
@@ -362,7 +362,7 @@ export function render(
     // add outline
     if (showLabelsOutline) {
       // NOTE: Adobe Illustrator does not support paint-order attr
-      labelsLayer.selectAll('text').styles(styles.labelOutline)
+      labelsLayer.selectAll('text').attr("class", "labelOutline") //instead of .styles(styles.labelOutline)
     }
 
     // auto hide labels
