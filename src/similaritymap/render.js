@@ -1,4 +1,8 @@
-import * as d3 from 'd3';
+import { select } from 'd3-selection';
+import { extent } from 'd3-array';
+import { axisLeft, axisBottom } from 'd3-axis';
+import { format } from 'd3-format';
+import { scaleLinear } from 'd3-scale';
 import { allTSNEE } from "../tsne";
 import PCAAnalysis from '../PCA';
 import UMAPAnalysis from '../UMAP';
@@ -37,7 +41,7 @@ export function render(node, data, visualOptions, mapping) {
   const xDimension = reducedDimensions.map(point => point[0]);
   const yDimension = reducedDimensions.map(point => point[1]);
 
-  const svg = d3.select(node);
+  const svg = select(node);
   const bounds = createBounds();
   const { xScale, yScale } = createScales();
   const { xAxis, yAxis } = createAxes();
@@ -165,15 +169,15 @@ export function render(node, data, visualOptions, mapping) {
   }
 
   function createScales() {
-    const xScale = d3
-      .scaleLinear()
-      .domain(d3.extent(xDimension))
+    const xScale =
+      scaleLinear()
+      .domain(extent(xDimension))
       .range([0, boundWidth])
       .nice();
 
-    const yScale = d3
-      .scaleLinear()
-      .domain(d3.extent(yDimension))
+    const yScale =
+      scaleLinear()
+      .domain(extent(yDimension))
       .range([boundHeight, 0])
       .nice();
 
@@ -181,9 +185,9 @@ export function render(node, data, visualOptions, mapping) {
   }
 
   function createAxes() {
-    const yAxisGenerator = d3.axisLeft()
+    const yAxisGenerator = axisLeft()
       .scale(yScale)
-      .tickFormat(d3.format(".1e"));
+      .tickFormat(format(".1e"));
     const yAxis = bounds.append("g")
       .call(yAxisGenerator)
       .attr("text-anchor", "left");
@@ -193,9 +197,9 @@ export function render(node, data, visualOptions, mapping) {
       .attr("transform", `translate(${0}, 0)`)
       .style("text-anchor", "end");
 
-    const xAxisGenerator = d3.axisBottom()
+    const xAxisGenerator = axisBottom()
       .scale(xScale)
-      .tickFormat(d3.format(".1e"));
+      .tickFormat(format(".1e"));
     const xAxis = bounds.append("g")
       .call(xAxisGenerator)
       .attr("transform", `translate(${0}, ${boundHeight})`);

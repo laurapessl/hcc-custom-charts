@@ -1,4 +1,6 @@
-import * as d3 from 'd3';
+import { select } from 'd3-selection';
+import { pie, arc } from 'd3-shape';
+import { max } from 'd3-array';
 import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core';
 import '../d3-styles.js';
 
@@ -51,12 +53,12 @@ export function render(
   const chartHeight = height - margin.top - margin.bottom;
   const radius = Math.min(chartWidth, chartHeight) / 2;
 
-  const svg = d3.select(svgNode)
+  const svg = select(svgNode)
     .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height);
 
   // Add background
-  d3.select(svgNode)
+  select(svgNode)
     .append('rect')
     .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height)
@@ -70,7 +72,7 @@ export function render(
     .attr('id', 'viz');
 
   // Create the pie layout
-  const pie = d3.pie()
+  const pie = pie()
     .startAngle(rotation)
     .endAngle(Math.PI*2 + rotation)
     .value(1)
@@ -78,14 +80,14 @@ export function render(
 
   // Map data for pie chart
   const pieData = pie(data);
-  const max_rad = d3.max(data, d => d.size) / data.length;
+  const max_rad = max(data, d => d.size) / data.length;
   console.log(pieData)
   console.log(max_rad)
 
   // Create the arc
-  const arc = d3.arc()
+  const arc = arc()
     .innerRadius(0)
-    .outerRadius(d => radius * (d.data.size / d3.max(data, d => d.size)) + padding*5);
+    .outerRadius(d => radius * (d.data.size / max(data, d => d.size)) + padding*5);
 
   console.log(arc)
 
@@ -99,18 +101,18 @@ export function render(
     .attr('stroke', 'white')
     .style('stroke-width', padding)
     .on('mouseover', function(event, d) {
-      d3.select(this).attr('opacity', 0.7);
-      d3.select(`#label-${d.index}`).style('display', 'block');
+      select(this).attr('opacity', 0.7);
+      select(`#label-${d.index}`).style('display', 'block');
     })
     .on('mouseout', function(event, d) {
-      d3.select(this).attr('opacity', 1);
-      d3.select(`#label-${d.index}`).style('display', 'none');
+      select(this).attr('opacity', 1);
+      select(`#label-${d.index}`).style('display', 'none');
     });
 
   // Create the arc for label placement
-  const labelArc = d3.arc()
-    .innerRadius(d => radius * (d.data.size / d3.max(data, d => d.size)) + 10) // Adjust 10 to control distance from the arc
-    .outerRadius(d => radius * (d.data.size / d3.max(data, d => d.size)) + 10);
+  const labelArc = arc()
+    .innerRadius(d => radius * (d.data.size / max(data, d => d.size)) + 10) // Adjust 10 to control distance from the arc
+    .outerRadius(d => radius * (d.data.size / max(data, d => d.size)) + 10);
 
   // Add hidden labels initially
   const textGroups = chartGroup.selectAll('text')
@@ -148,8 +150,8 @@ export function render(
   }
 
   if (showLegend) {
-    const legendLayer = d3
-      .select(svgNode)
+    const legendLayer =
+      select(svgNode)
       .append('g')
       .attr('id', 'legend')
       .attr('transform', `translate(${width - legendWidth},${marginTop})`);

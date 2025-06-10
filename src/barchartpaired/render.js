@@ -1,4 +1,7 @@
-import * as d3 from 'd3'
+import { select } from 'd3-selection';
+import { extent, descending, ascending, sum, rollups } from 'd3-array';
+import { axisLeft, axisBottom } from 'd3-axis';
+import { scaleLinear, scaleBand } from 'd3-scale';
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
@@ -56,7 +59,7 @@ export function render(
     barsDomain,
   } = calcProps()
 
-  const svg = d3.select(node)
+  const svg = select(node)
   const bounds = createBounds()
   const { x1Scale, x2Scale, x1ScaleReverse, yScale } = createScales()
   const { x1Axis, x2Axis, yAxis } = createAxes()
@@ -83,16 +86,16 @@ export function render(
     const yAccessor = (d) => d.y
 
     const barsSortings = {
-      totalDescending: (a, b) => d3.descending(a[1], b[1]),
-      totalAscending: (a, b) => d3.ascending(a[1], b[1]),
-      name: (a, b) => d3.ascending(a[0], b[0]),
+      totalDescending: (a, b) => descending(a[1], b[1]),
+      totalAscending: (a, b) => ascending(a[1], b[1]),
+      name: (a, b) => ascending(a[0], b[0]),
       original: (a, b) => true,
     }
 
-    const barsDomain = d3
-      .rollups(
+    const barsDomain =
+      rollups(
         data,
-        (v) => d3.sum(v, (d) => d.size),
+        (v) => sum(v, (d) => d.size),
         (d) => d.y
       )
       .sort(barsSortings[sortBarsBy])
@@ -130,26 +133,26 @@ export function render(
   }
 
   function createScales() {
-    const x1Scale = d3
-      .scaleLinear()
-      .domain(d3.extent(data, x1Accessor))
+    const x1Scale =
+      scaleLinear()
+      .domain(extent(data, x1Accessor))
       .range([0, boundWidthOneChart / 2])
       .nice()
 
-    const x1ScaleReverse = d3
-      .scaleLinear()
-      .domain(d3.extent(data, x1Accessor))
+    const x1ScaleReverse =
+      scaleLinear()
+      .domain(extent(data, x1Accessor))
       .range([boundWidth, (boundWidth + spaceCommonAxis) / 2])
       .nice()
 
-    const x2Scale = d3
-      .scaleLinear()
-      .domain(d3.extent(data, x2Accessor))
+    const x2Scale =
+      scaleLinear()
+      .domain(extent(data, x2Accessor))
       .range([0, boundWidthOneChart / 2])
       .nice()
 
-    const yScale = d3
-      .scaleBand()
+    const yScale =
+      scaleBand()
       .domain(barsDomain)
       .range([0, boundHeight])
       .padding(padding / (boundHeight / barsDomain.length))
@@ -158,7 +161,7 @@ export function render(
   }
 
   function createAxes() {
-    const yAxisGenerator = d3.axisLeft().scale(yScale)
+    const yAxisGenerator = axisLeft().scale(yScale)
     const yAxis = bounds
       .append('g')
       .call(yAxisGenerator)
@@ -173,7 +176,7 @@ export function render(
       .attr('x', '0')
       .attr('text-anchor', 'middle')
 
-    const x1AxisGenerator = d3.axisBottom().scale(x1ScaleReverse)
+    const x1AxisGenerator = axisBottom().scale(x1ScaleReverse)
     const x1Axis = bounds
       .append('g')
       .call(x1AxisGenerator)
@@ -187,7 +190,7 @@ export function render(
       .attr('text-anchor', labelLeftAlignment)
       .attr('transform', `rotate(${labelLeftRotation})`)
 
-    const x2AxisGenerator = d3.axisBottom().scale(x2Scale)
+    const x2AxisGenerator = axisBottom().scale(x2Scale)
     const x2Axis = bounds
       .append('g')
       .call(x2AxisGenerator)

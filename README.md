@@ -7,11 +7,11 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 
 1. Clone the git repository:
     ```
-    git clone https://github.com/laurapessl/rawgraphs-custom-charts.git
+    git clone https://github.com/laurapessl/hcc-custom-charts.git
     ```
 2. Go to the repository folder 
     ```
-    cd rawgraphs-custom-charts
+    cd hcc-custom-charts
     ```
 3. Install the client-side dependencies:
     ```
@@ -27,10 +27,10 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 1. Go to the repository folder:  
 
     📂 yourfolder  
-    └── 📁 `rawgraphs-custom-charts/`  
+    └── 📁 `hcc-custom-charts/`  
 
     ```
-    cd rawgraphs-custom-charts
+    cd hcc-custom-charts
     ```
 2. Create link:
     ```
@@ -47,7 +47,7 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 2. Go to the repository folder:
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts/`  
+    ├── 📁 `hcc-custom-charts/`  
     └── 📁 `rawgraphs-app/`
 
     ```
@@ -70,11 +70,11 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
 ## Sandbox Environment
 1. Clone the git repository:
     ```
-    git clone https://github.com/laurapessl/rawgraphs-custom-charts.git
+    git clone https://github.com/laurapessl/hcc-custom-charts.git
     ```
 2. Go to the repository folder
     ```
-    cd rawgraphs-custom-charts
+    cd hcc-custom-charts
     ```
 3. Install the client-side dependencies:
     ```
@@ -96,25 +96,24 @@ If you are satisfied with your project, you can build the JavaScript bundle to b
 1. Go to the repository:
 
     📂 yourfolder  
-        ├── 📁 `rawgraphs-custom-charts/`   
+        ├── 📁 `hcc-custom-charts/`   
         └── 📁 `rawgraphs-app/`
 
     ```
-    cd rawgraphs-custom-charts
+    cd hcc-custom-charts
     ```
 2. Build the project
     ```
     yarn build
     ```
-3. This will generate a folder named `lib/` in `rawgraphs-charts/`, in which you will find three files:
+3. This will generate a folder named `lib/` in `hcc-custom-charts/`, in which you will find three files:
 
     📂 yourfolder  
-        ├── 📁 `rawgraphs-custom-charts/`    
-        ├── 📁 `rawgraphs-charts/`  
+        ├── 📁 `hcc-custom-charts/`     
         <span style="color: transparent;">├──</span>└── 📁 `lib/`  
         <span style="color: transparent;">├──├──</span>├── `index.cjs.js`  
         <span style="color: transparent;">├──├──</span>├── `index.es.js`  
-        <span style="color: transparent;">├──├──</span>└── `index.umd.js`  
+        <span style="color: transparent;">├──├──</span>└── `hcc-custom-charts.umd.js`  
         └── 📁 `rawgraphs-app/`
 
     The `index.umd.js` file can now be loaded with RAWGraphs.  

@@ -1,4 +1,7 @@
-import * as d3 from 'd3'
+import { rollup } from 'd3-array';
+import { select } from 'd3-selection';
+import { hierarchy, partition } from 'd3-hierarchy';
+import { arc } from 'd3-shape';
 import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
@@ -56,26 +59,25 @@ export function render(
   const radius = chartWidth > chartHeight ? chartHeight / 2 : chartWidth / 2
 
   // create the hierarchical structure
-  const nest = d3.rollup(
+  const nest = rollup(
     data,
     (v) => v[0],
     ...mapping.hierarchy.value.map((level) => (d) => d.hierarchy.get(level))
   )
 
-  const hierarchy = d3
-    .hierarchy(nest)
+  const hierarchy =
+    hierarchy(nest)
     .sum((d) => (d[1] instanceof Map ? 0 : d[1].size)) // since maps have also a .size porperty, sum only values for leaves, and not for Maps
   //@TODO: find a way to filter hierarchy
 
   const partition = (nest) =>
-    d3
-      .partition() // copied from example of d3v6, not clear the meaning
+      partition() // copied from example of d3v6, not clear the meaning
       .size([2 * Math.PI, radius])(hierarchy)
 
   const root = partition(nest)
 
-  const arc = d3
-    .arc()
+  const arc =
+    arc()
     .startAngle((d) => d.x0)
     .endAngle((d) => d.x1)
     .padAngle(padding / (radius / 2)) // convert padding in radians
@@ -83,10 +85,10 @@ export function render(
     .innerRadius((d) => d.y0)
     .outerRadius((d) => d.y1 - padding)
 
-  const svg = d3.select(svgNode)
+  const svg = select(svgNode)
 
   // add background
-  d3.select(svgNode)
+  select(svgNode)
     .append('rect')
     .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height)
@@ -178,8 +180,8 @@ export function render(
 
   if (showLegend) {
     // svg width is adjusted automatically because of the "container:height" annotation in legendWidth visual option
-    const legendLayer = d3
-      .select(svgNode)
+    const legendLayer =
+      select(svgNode)
       .append('g')
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)

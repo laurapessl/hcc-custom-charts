@@ -6,7 +6,7 @@ Follow the `Getting Started` instructions in the `README.md`.
 
 Your folder structure should look like this:  
 📂 yourfolder  
-    └── 📁 `rawgraphs-custom-charts/`  
+    └── 📁 `hcc-custom-charts/`  
 
 ## Create your Chart
 
@@ -115,7 +115,11 @@ Your folder structure should look like this:
     ```
     **render.js**
     ```
-    import * as d3 from 'd3'
+    import { select } from 'd3-selection'
+    import { extent } from 'd3-array'
+    import { axisLeft, axisBottom } from 'd3-axis'
+    import { format } from 'd3-format'
+    import { scaleLinear } from 'd3-scale'
     import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
     import '../d3-styles.js'
 
@@ -187,7 +191,7 @@ There are two ways, to test your chart:
 2. Go to the repository folder:  
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts/`  
+    ├── 📁 `hcc-custom-charts/`  
     └── 📁 `rawgraphs-charts/`  
 
     ```
@@ -217,8 +221,7 @@ There are two ways, to test your chart:
 2. Go to the repository folder:
 
     📂 yourfolder  
-    ├── 📁 `rawgraphs-custom-charts/`  
-    ├── 📁 `rawgraphs-charts/`  
+    ├── 📁 `hcc-custom-charts/`   
     └── 📁 `rawgraphs-app/`
 
     ```
@@ -246,11 +249,11 @@ There are two ways, to test your chart:
 ## Sandbox Environment
 1. Clone the git repository:
     ```
-    git clone https://github.com/laurapessl/rawgraphs-custom-charts.git
+    git clone https://github.com/laurapessl/hcc-custom-charts.git
     ```
 2. Go to the repository folder
     ```
-    cd rawgraphs-custom-charts
+    cd hcc-custom-charts
     ```
 3. Install the client-side dependencies:
     ```

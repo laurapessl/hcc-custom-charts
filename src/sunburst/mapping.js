@@ -1,4 +1,4 @@
-import * as d3 from 'd3'
+import { rollups } from 'd3-array';
 import { getDimensionAggregator } from '@rawgraphs/rawgraphs-core'
 
 export const mapData = function (data, mapping, dataTypes, dimensions) {
@@ -28,7 +28,7 @@ export const mapData = function (data, mapping, dataTypes, dimensions) {
 
   const results = []
 
-  const result = d3.rollups(
+  const result = rollups(
     data,
     (v) => {
       const item = {

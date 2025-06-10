@@ -1,4 +1,9 @@
-import * as d3 from 'd3'
+import { extent, groups, descending, ascending } from 'd3-array';
+import { select } from 'd3-selection';
+import { scaleLinear, scaleTime } from 'd3-scale';
+import { axisLeft, axisBottom } from 'd3-axis';
+import { timeFormat } from 'd3-time-format';
+import { line } from 'd3-shape';
 import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
 import '../d3-styles.js'
 
@@ -47,7 +52,7 @@ export function render(
   }
 
   // if series is exposed, recreate the nested structure
-  const nestedData = d3.groups(data, (d) => d.series)
+  const nestedData = groups(data, (d) => d.series)
 
   // compute max values for series
   // will add it as property to each series.
@@ -64,20 +69,20 @@ export function render(
   // series sorting functions
   const seriesSortings = {
     totalDescending: function (a, b) {
-      return d3.descending(a.totalValue, b.totalValue)
+      return descending(a.totalValue, b.totalValue)
     },
     totalAscending: function (a, b) {
-      return d3.ascending(a.totalValue, b.totalValue)
+      return ascending(a.totalValue, b.totalValue)
     },
     name: function (a, b) {
-      return d3.ascending(a[0], b[0])
+      return ascending(a[0], b[0])
     },
   }
   // sort series
   nestedData.sort(seriesSortings[sortSeriesBy])
 
   // select the SVG element
-  const svg = d3.select(svgNode)
+  const svg = select(svgNode)
 
   // add background
   svg
@@ -164,8 +169,8 @@ export function render(
   // do stuff for each series
   series.each(function (serie, seriesIndex) {
     // make a local selection for each series
-    const selection = d3
-      .select(this)
+    const selection =
+      select(this)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
@@ -174,7 +179,7 @@ export function render(
 
     // add series titles
     if (showSeriesLabels) {
-      d3.select(this)
+      select(this)
         .append('text')
         .attr('y', 4)
         .attr('x', 4)
@@ -192,9 +197,9 @@ export function render(
     // y domain
     const yDomain = useSameYScale
       ? // compute extent of the whole dataset
-        d3.extent(data, (e) => e.y)
+        extent(data, (e) => e.y)
       : // compute extent of the single series
-        d3.extent(serieData, (d) => d.y)
+        extent(serieData, (d) => d.y)
 
     if (yOrigin) {
       yDomain[0] = 0
@@ -203,9 +208,9 @@ export function render(
     // x domain
     const xDomain = useSameXScale
       ? // compute extent of the whole dataset
-        d3.extent(data, (e) => e.x)
+        extent(data, (e) => e.x)
       : // compute extent of the single series
-        d3.extent(serieData, (d) => d.x)
+        extent(serieData, (d) => d.x)
 
     if (xOrigin) {
       xDomain[0] = 0
@@ -214,13 +219,13 @@ export function render(
     // create scales
     // x scale
     const xScale =
-      mapping.x.dataType.type === 'date' ? d3.scaleTime() : d3.scaleLinear()
+      mapping.x.dataType.type === 'date' ? scaleTime() : scaleLinear()
 
     xScale.domain(xDomain).rangeRound([0, seriesWidth]).nice()
 
     // y scale
     const yScale =
-      mapping.y.dataType.type === 'date' ? d3.scaleTime() : d3.scaleLinear()
+      mapping.y.dataType.type === 'date' ? scaleTime() : scaleLinear()
 
     yScale.domain(yDomain).rangeRound([seriesHeight, 0]).nice()
 
@@ -229,7 +234,7 @@ export function render(
     const xAxis = (g) => {
       return g
         .attr('transform', `translate(0,${seriesHeight})`)
-        .call(d3.axisBottom(xScale))
+        .call(axisBottom(xScale))
         .call((g) =>
           g
             .append('text')
@@ -244,7 +249,7 @@ export function render(
     // y axis
     const yAxis = (g) => {
       return g
-        .call(d3.axisLeft(yScale))
+        .call(axisLeft(yScale))
         .call((g) =>
           g
             .append('text')
@@ -267,8 +272,8 @@ export function render(
 
     // add connection line
     if (mapping.connectedBy.value) {
-      const line = d3
-        .line()
+      const line =
+        line()
         .x((d) => xScale(d.x))
         .y((d) => yScale(d.y))
 
@@ -277,7 +282,7 @@ export function render(
         .attr('d', () =>
           line(
             serieData.sort((a, b) => {
-              return d3.ascending(a.connectedBy, b.connectedBy)
+              return ascending(a.connectedBy, b.connectedBy)
             })
           )
         )
@@ -337,7 +342,7 @@ export function render(
       .attr('dy', (d, i) => i * 12) //@TODO fix magic number
       .text((d, i) => {
         if (d && mapping.label.dataType[i].type === 'date') {
-          return d3.timeFormat(
+          return timeFormat(
             dateFormats[mapping.label.dataType[i].dateFormat]
           )(d)
         } else {
@@ -371,8 +376,8 @@ export function render(
 
   // add legend
   if (showLegend) {
-    const legendLayer = d3
-      .select(svgNode)
+    const legendLayer =
+      select(svgNode)
       .append('g')
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
