@@ -13,7 +13,6 @@ export function render(
   styles
 ) {
   const {
-    // artboard
     width,
     height,
     background,
@@ -22,19 +21,14 @@ export function render(
     marginBottom,
     marginLeft,
     title,
-    // legend
     showLegend,
     legendWidth,
-    // chart
     padding,
     rotation,
-    // labels
     label1Style,
     label2Style,
     label3Style,
-    // colors
     colorScale,
-    // labels
     showHierarchyLabels,
     labelHierarchyStyle,
     labelStyles,
@@ -74,24 +68,19 @@ export function render(
   // Create the pie layout
   const pie = d3Pie()
     .startAngle(rotation)
-    .endAngle(Math.PI*2 + rotation)
+    .endAngle(Math.PI * 2 + rotation)
     .value(1)
     .sort(null);
 
-  // Map data for pie chart
-  const pieData = d3Pie(data);
+  const pieData = pie(data);
   const max_rad = d3Max(data, d => d.size) / data.length;
-  console.log(pieData)
-  console.log(max_rad)
+  console.log(pieData);
+  console.log(max_rad);
 
-  // Create the arc
   const arc = d3Arc()
     .innerRadius(0)
-    .outerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + padding*5);
+    .outerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + padding * 5);
 
-  console.log(arc)
-
-  // Draw the arcs
   chartGroup.selectAll('path')
     .data(pieData)
     .enter()
@@ -100,36 +89,33 @@ export function render(
     .attr('fill', d => colorScale(d.data.color))
     .attr('stroke', 'white')
     .style('stroke-width', padding)
-    .on('mouseover', function(event, d) {
+    .on('mouseover', function (event, d) {
       d3Select(this).attr('opacity', 0.7);
       d3Select(`#label-${d.index}`).style('display', 'block');
     })
-    .on('mouseout', function(event, d) {
+    .on('mouseout', function (event, d) {
       d3Select(this).attr('opacity', 1);
       d3Select(`#label-${d.index}`).style('display', 'none');
     });
 
-  // Create the arc for label placement
   const labelArc = d3Arc()
-    .innerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + 10) // Adjust 10 to control distance from the arc
+    .innerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + 10)
     .outerRadius(d => radius * (d.data.size / d3Max(data, d => d.size)) + 10);
 
-  // Add hidden labels initially
   const textGroups = chartGroup.selectAll('text')
     .data(pieData)
     .enter()
     .append('text')
     .attr('id', d => `label-${d.index}`)
-    .attr('transform', function(d) {
+    .attr('transform', function (d) {
       const [x, y] = labelArc.centroid(d);
       return `translate(${x}, ${y})`;
     })
     .attr('dy', '.35em')
     .attr('text-anchor', 'middle')
-    .text(d => d.data.hierarchy.get('month')) // Adjust based on the actual hierarchy level needed
+    .text(d => d.data.hierarchy.get('month'))
     .style('display', 'none');
 
-  // Add title
   if (title) {
     svg.append('text')
       .attr('x', width / 2)
@@ -138,11 +124,11 @@ export function render(
       .attr('font-size', '16px')
       .attr('font-weight', 'bold')
       .text(title)
-      .attr('dy', '1em');  // Adjust this value to move the title down
-  } 
+      .attr('dy', '1em');
+  }
 
   if (showLabelsOutline) {
-    textGroups.attr('class', 'labelOutline'); //instead of .styles(styles.labelOutline)
+    textGroups.styles(styles.labelOutline);
   }
 
   if (autoHideLabels) {
@@ -150,8 +136,7 @@ export function render(
   }
 
   if (showLegend) {
-    const legendLayer =
-    d3Select(svgNode)
+    const legendLayer = d3Select(svgNode)
       .append('g')
       .attr('id', 'legend')
       .attr('transform', `translate(${width - legendWidth},${marginTop})`);

@@ -1,4 +1,5 @@
-import { selection, select, transition } from 'd3'
+import { select, selection } from 'd3-selection';
+import { transition } from 'd3-transition';
 selection.prototype.styles = styles
 transition.prototype.styles = styles
 

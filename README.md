@@ -76,15 +76,11 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
     ```
     cd hcc-custom-charts
     ```
-3. Install the client-side dependencies:
+3. Run the sandbox environment to test your charts:
     ```
-    yarn install
+    yarn sandbox
     ```
-4. Run the sandbox environment to test your charts:
-    ```
-    npm run sandbox
-    ```
-5. Check out the live preview under:
+4. Check out the live preview under:
     ```
     localhost:9000
     ```
@@ -147,18 +143,15 @@ nvm install 22
 nvm use 22
 ```
 
-## Problems with `npm run sandbox`
+## Problems with `yarn sandbox`
 Commands that may fix some of the Node.js errors when trying to run .
 ```
 yarn add ml-pca umap-js
-npm install dsv-loader --save-dev
-npx browserslist@latest --update-db
 ```
-## Problems with `npm run build`
+## Problems with `yarn build`
 react-scripts: not found
 ```
 yarn install
-npm install
 ```
 ### Changes to run Similarity Map in Sandbox
 - added `src/similaritymap`.
