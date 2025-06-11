@@ -1,4 +1,4 @@
-import { select } from 'd3-selection';
+import { select as d3Select } from 'd3-selection';
 import { pie as d3Pie, arc as d3Arc} from 'd3-shape';
 import { max as d3Max } from 'd3-array';
 import { legend, labelsOcclusion } from '@rawgraphs/rawgraphs-core';
@@ -53,12 +53,12 @@ export function render(
   const chartHeight = height - margin.top - margin.bottom;
   const radius = Math.min(chartWidth, chartHeight) / 2;
 
-  const svg = select(svgNode)
+  const svg = d3Select(svgNode)
     .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height);
 
   // Add background
-  select(svgNode)
+  d3Select(svgNode)
     .append('rect')
     .attr('width', showLegend ? width + legendWidth : width)
     .attr('height', height)
@@ -101,12 +101,12 @@ export function render(
     .attr('stroke', 'white')
     .style('stroke-width', padding)
     .on('mouseover', function(event, d) {
-      select(this).attr('opacity', 0.7);
-      select(`#label-${d.index}`).style('display', 'block');
+      d3Select(this).attr('opacity', 0.7);
+      d3Select(`#label-${d.index}`).style('display', 'block');
     })
     .on('mouseout', function(event, d) {
-      select(this).attr('opacity', 1);
-      select(`#label-${d.index}`).style('display', 'none');
+      d3Select(this).attr('opacity', 1);
+      d3Select(`#label-${d.index}`).style('display', 'none');
     });
 
   // Create the arc for label placement
@@ -151,7 +151,7 @@ export function render(
 
   if (showLegend) {
     const legendLayer =
-      select(svgNode)
+    d3Select(svgNode)
       .append('g')
       .attr('id', 'legend')
       .attr('transform', `translate(${width - legendWidth},${marginTop})`);
