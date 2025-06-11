@@ -1,11 +1,22 @@
-import { extent, groups, descending, ascending } from 'd3-array';
-import { select } from 'd3-selection';
-import { scaleLinear, scaleTime } from 'd3-scale';
-import { axisLeft, axisBottom } from 'd3-axis';
-import { timeFormat } from 'd3-time-format';
+import {
+  extent as d3Extent,
+  groups as d3Groups,
+  descending as d3Descending,
+  ascending as d3Ascending,
+} from 'd3-array';
+import { select as d3Select } from 'd3-selection';
+import {
+  scaleLinear as d3ScaleLinear,
+  scaleTime as d3ScaleTime,
+} from 'd3-scale';
+import {
+  axisLeft as d3AxisLeft,
+  axisBottom as d3AxisBottom,
+} from 'd3-axis';
+import { timeFormat as d3TimeFormat } from 'd3-time-format';
 import { line as d3Line } from 'd3-shape';
-import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core'
-import '../d3-styles.js'
+import { legend, dateFormats, labelsOcclusion } from '@rawgraphs/rawgraphs-core';
+import '../d3-styles.js';
 
 export function render(
   svgNode,
@@ -52,7 +63,7 @@ export function render(
   }
 
   // if series is exposed, recreate the nested structure
-  const nestedData = groups(data, (d) => d.series)
+  const nestedData = d3Groups(data, (d) => d.series)
 
   // compute max values for series
   // will add it as property to each series.
@@ -69,20 +80,20 @@ export function render(
   // series sorting functions
   const seriesSortings = {
     totalDescending: function (a, b) {
-      return descending(a.totalValue, b.totalValue)
+      return d3Descending(a.totalValue, b.totalValue)
     },
     totalAscending: function (a, b) {
-      return ascending(a.totalValue, b.totalValue)
+      return d3Ascending(a.totalValue, b.totalValue)
     },
     name: function (a, b) {
-      return ascending(a[0], b[0])
+      return d3Ascending(a[0], b[0])
     },
   }
   // sort series
   nestedData.sort(seriesSortings[sortSeriesBy])
 
   // select the SVG element
-  const svg = select(svgNode)
+  const svg = d3Select(svgNode)
 
   // add background
   svg
@@ -170,7 +181,7 @@ export function render(
   series.each(function (serie, seriesIndex) {
     // make a local selection for each series
     const selection =
-      select(this)
+      d3Select(this)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
@@ -179,7 +190,7 @@ export function render(
 
     // add series titles
     if (showSeriesLabels) {
-      select(this)
+      d3Select(this)
         .append('text')
         .attr('y', 4)
         .attr('x', 4)
@@ -197,9 +208,9 @@ export function render(
     // y domain
     const yDomain = useSameYScale
       ? // compute extent of the whole dataset
-        extent(data, (e) => e.y)
+      d3Extent(data, (e) => e.y)
       : // compute extent of the single series
-        extent(serieData, (d) => d.y)
+      d3Extent(serieData, (d) => d.y)
 
     if (yOrigin) {
       yDomain[0] = 0
@@ -208,9 +219,9 @@ export function render(
     // x domain
     const xDomain = useSameXScale
       ? // compute extent of the whole dataset
-        extent(data, (e) => e.x)
+      d3Extent(data, (e) => e.x)
       : // compute extent of the single series
-        extent(serieData, (d) => d.x)
+      d3Extent(serieData, (d) => d.x)
 
     if (xOrigin) {
       xDomain[0] = 0
@@ -219,13 +230,13 @@ export function render(
     // create scales
     // x scale
     const xScale =
-      mapping.x.dataType.type === 'date' ? scaleTime() : scaleLinear()
+      mapping.x.dataType.type === 'date' ? d3ScaleTime() : d3ScaleLinear()
 
     xScale.domain(xDomain).rangeRound([0, seriesWidth]).nice()
 
     // y scale
     const yScale =
-      mapping.y.dataType.type === 'date' ? scaleTime() : scaleLinear()
+      mapping.y.dataType.type === 'date' ? d3ScaleTime() : d3ScaleLinear()
 
     yScale.domain(yDomain).rangeRound([seriesHeight, 0]).nice()
 
@@ -234,7 +245,7 @@ export function render(
     const xAxis = (g) => {
       return g
         .attr('transform', `translate(0,${seriesHeight})`)
-        .call(axisBottom(xScale))
+        .call(d3AxisBottom(xScale))
         .call((g) =>
           g
             .append('text')
@@ -249,7 +260,7 @@ export function render(
     // y axis
     const yAxis = (g) => {
       return g
-        .call(axisLeft(yScale))
+        .call(d3AxisLeft(yScale))
         .call((g) =>
           g
             .append('text')
@@ -272,17 +283,16 @@ export function render(
 
     // add connection line
     if (mapping.connectedBy.value) {
-      const line =
-      d3Line()
+      const line = d3Line()
         .x((d) => xScale(d.x))
         .y((d) => yScale(d.y))
 
       vizLayer
         .append('path')
         .attr('d', () =>
-          d3Line(
+          line(
             serieData.sort((a, b) => {
-              return ascending(a.connectedBy, b.connectedBy)
+              return d3Ascending(a.connectedBy, b.connectedBy)
             })
           )
         )
@@ -291,7 +301,7 @@ export function render(
         .attr('fill', 'none')
         .attr('marker-mid','url(#arrow)')
         .attr('marker-end','url(#arrow)')
-          .attr('marker-size', 10)
+        .attr('marker-size', 10)
     }
 
     // create circles
@@ -342,7 +352,7 @@ export function render(
       .attr('dy', (d, i) => i * 12) //@TODO fix magic number
       .text((d, i) => {
         if (d && mapping.label.dataType[i].type === 'date') {
-          return timeFormat(
+          return d3TimeFormat(
             dateFormats[mapping.label.dataType[i].dateFormat]
           )(d)
         } else {
@@ -362,7 +372,8 @@ export function render(
     // add outline
     if (showLabelsOutline) {
       // NOTE: Adobe Illustrator does not support paint-order attr
-      labelsLayer.selectAll('text').attr("class", "labelOutline") //instead of .styles(styles.labelOutline)
+      //labelsLayer.selectAll('text').attr("class", "labelOutline") //instead of .styles(styles.labelOutline)
+      labelsLayer.selectAll('text').styles(styles.labelOutline)
     }
 
     // auto hide labels
@@ -377,7 +388,7 @@ export function render(
   // add legend
   if (showLegend) {
     const legendLayer =
-      select(svgNode)
+      d3Select(svgNode)
       .append('g')
       .attr('id', 'legend')
       .attr('transform', `translate(${width},${marginTop})`)
