@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="rawgraphs-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.25 41.4">
+  <rect x=".58" y="27.83" width="13.06" height="8.06" transform="translate(-24.75 38.96) rotate(-90)" style="fill: #ad00ff;"/>
+  <polyline points="10.32 23.59 18.54 14.69 28.07 8.1 37.77 4.71" style="fill: none; stroke: #ad00ff; stroke-miterlimit: 10;"/>
+  <rect x="1.19" y="1.32" width=".99" height="38.86" style="fill: #ad00ff;"/>
+  <polygon points="0 3.11 1.68 1.43 3.37 3.11 3.37 1.68 1.68 0 0 1.68 0 3.11" style="fill: #ad00ff;"/>
+  <rect x="1.25" y="39.22" width="38.86" height=".99" style="fill: #ad00ff;"/>
+  <polygon points="38.13 38.03 39.82 39.72 38.13 41.4 39.56 41.4 41.25 39.72 39.56 38.03 38.13 38.03" style="fill: #ad00ff;"/>
+  <rect x="11" y="29.48" width="9.79" height="8.06" transform="translate(-17.61 49.4) rotate(-90)" style="fill: #ad00ff;"/>
+  <rect x="20.56" y="30.24" width="8.32" height="8.06" transform="translate(-9.55 58.99) rotate(-90)" style="fill: #ad00ff;"/>
+  <rect x="31.67" y="32.63" width="3.55" height="8.06" transform="translate(-3.21 70.1) rotate(-90)" style="fill: #ad00ff;"/>
+</svg>
