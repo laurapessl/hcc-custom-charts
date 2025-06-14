@@ -142,7 +142,7 @@ export const visualOptions = {
     dimension: 'x1',
     default: {
       scaleType: 'sequential',
-      interpolator: 'interpolateReds',
+      interpolator: 'interpolateBlues',
     },
     group: 'color',
   },
@@ -153,7 +153,7 @@ export const visualOptions = {
     dimension: 'x2',
     default: {
       scaleType: 'sequential',
-      interpolator: 'interpolateBlues',
+      interpolator: 'interpolateReds',
     },
     group: 'color',
   },

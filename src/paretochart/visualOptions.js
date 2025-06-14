@@ -119,14 +119,10 @@ export const visualOptions = {
   },
 
   // Color
-  colorScale1: {
-    type: 'colorScale',
-    label: 'Color bars',
-    dimension: 'x',
-    default: {
-      scaleType: 'sequential',
-      interpolator: 'interpolateReds',
-    },
+  barColor: {
+    type: 'color',
+    label: 'Bar color',
+    default: '#1f77b4', 
     group: 'color',
   },
 

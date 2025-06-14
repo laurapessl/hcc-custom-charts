@@ -32,7 +32,7 @@ export default ['esm', 'cjs', 'umd'].map((format) => ({
   output: [
     {
       dir: 'lib',
-      entryFileNames: format === 'umd' ? 'hcc-custom-charts.umd.js' : '[name].[format].js',
+      entryFileNames: 'hcc-custom-charts.[format].js',
       exports: 'named',
       name: 'rawcharts',
       format,

@@ -1,12 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="rawgraphs-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.25 41.4">
-  <rect x=".58" y="27.83" width="13.06" height="8.06" transform="translate(-24.75 38.96) rotate(-90)" style="fill: #ad00ff;"/>
-  <polyline points="10.32 23.59 18.54 14.69 28.07 8.1 37.77 4.71" style="fill: none; stroke: #ad00ff; stroke-miterlimit: 10;"/>
-  <rect x="1.19" y="1.32" width=".99" height="38.86" style="fill: #ad00ff;"/>
-  <polygon points="0 3.11 1.68 1.43 3.37 3.11 3.37 1.68 1.68 0 0 1.68 0 3.11" style="fill: #ad00ff;"/>
-  <rect x="1.25" y="39.22" width="38.86" height=".99" style="fill: #ad00ff;"/>
-  <polygon points="38.13 38.03 39.82 39.72 38.13 41.4 39.56 41.4 41.25 39.72 39.56 38.03 38.13 38.03" style="fill: #ad00ff;"/>
-  <rect x="11" y="29.48" width="9.79" height="8.06" transform="translate(-17.61 49.4) rotate(-90)" style="fill: #ad00ff;"/>
-  <rect x="20.56" y="30.24" width="8.32" height="8.06" transform="translate(-9.55 58.99) rotate(-90)" style="fill: #ad00ff;"/>
-  <rect x="31.67" y="32.63" width="3.55" height="8.06" transform="translate(-3.21 70.1) rotate(-90)" style="fill: #ad00ff;"/>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 805 600">
+  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->
+  <defs>
+    <style>
+      .st0 {
+        font-family: Helvetica, Helvetica;
+      }
+
+      .st0, .st1 {
+        font-size: 10px;
+      }
+
+      .st1 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+      }
+
+      .st2 {
+        fill: #e90006;
+      }
+
+      .st2, .st3, .st4 {
+        stroke-miterlimit: 10;
+      }
+
+      .st2, .st4 {
+        stroke: #e90006;
+        stroke-width: 2px;
+      }
+
+      .st5 {
+        fill: #4a78dd;
+      }
+
+      .st3 {
+        stroke: #000;
+      }
+
+      .st3, .st4 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <polyline class="st3" points="722.85 72.4 722.85 504.74 92.41 504.74 92.43 72.41"/>
+  <line class="st3" x1="86.85" y1="72.91" x2="92.03" y2="72.91"/>
+  <line class="st3" x1="86.86" y1="159.27" x2="92.04" y2="159.27"/>
+  <line class="st3" x1="86.84" y1="245.65" x2="92.02" y2="245.65"/>
+  <line class="st3" x1="86.85" y1="332" x2="92.03" y2="332"/>
+  <line class="st3" x1="86.85" y1="418.39" x2="92.03" y2="418.39"/>
+  <line class="st3" x1="86.87" y1="504.8" x2="92.05" y2="504.8"/>
+  <line class="st3" x1="723.25" y1="504.75" x2="728.43" y2="504.75"/>
+  <line class="st3" x1="723.34" y1="461.57" x2="728.52" y2="461.57"/>
+  <line class="st3" x1="723.26" y1="418.39" x2="728.43" y2="418.39"/>
+  <line class="st3" x1="723.26" y1="375.17" x2="728.44" y2="375.17"/>
+  <line class="st3" x1="723.34" y1="332.01" x2="728.52" y2="332.01"/>
+  <line class="st3" x1="723.33" y1="288.82" x2="728.51" y2="288.82"/>
+  <line class="st3" x1="723.32" y1="245.67" x2="728.5" y2="245.67"/>
+  <line class="st3" x1="723.27" y1="202.45" x2="728.45" y2="202.45"/>
+  <line class="st3" x1="723.29" y1="159.25" x2="728.47" y2="159.25"/>
+  <line class="st3" x1="723.34" y1="116.08" x2="728.52" y2="116.08"/>
+  <line class="st3" x1="723.33" y1="72.89" x2="728.51" y2="72.89"/>
+  <line class="st3" x1="176.89" y1="505.21" x2="176.89" y2="510.39"/>
+  <line class="st3" x1="330.73" y1="505.22" x2="330.73" y2="510.4"/>
+  <line class="st3" x1="484.55" y1="505.21" x2="484.55" y2="510.39"/>
+  <line class="st3" x1="638.37" y1="505.14" x2="638.37" y2="510.32"/>
+  <line class="st3" x1="722.84" y1="505.05" x2="722.84" y2="510.23"/>
+  <line class="st3" x1="92.41" y1="505.17" x2="92.41" y2="510.35"/>
+  <text class="st1" transform="translate(78.32 508.16)"><tspan x="0" y="0">0</tspan></text>
+  <text class="st1" transform="translate(73.82 421.74)"><tspan x="0" y="0">50</tspan></text>
+  <text class="st1" transform="translate(69 335.29)"><tspan x="0" y="0">100</tspan></text>
+  <text class="st1" transform="translate(68.58 248.93)"><tspan x="0" y="0">150</tspan></text>
+  <text class="st1" transform="translate(68.67 162.5)"><tspan x="0" y="0">200</tspan></text>
+  <text class="st1" transform="translate(68.5 76.08)"><tspan x="0" y="0">250</tspan></text>
+  <text class="st1" transform="translate(730.93 508.2)"><tspan x="0" y="0">0%</tspan></text>
+  <text class="st1" transform="translate(731.07 465.01)"><tspan x="0" y="0">10%</tspan></text>
+  <text class="st1" transform="translate(730.91 421.6)"><tspan x="0" y="0">20%</tspan></text>
+  <text class="st1" transform="translate(731.16 378.5)"><tspan x="0" y="0">30%</tspan></text>
+  <text class="st1" transform="translate(731.04 335.24)"><tspan x="0" y="0">40%</tspan></text>
+  <text class="st1" transform="translate(731.1 292.16)"><tspan x="0" y="0">50%</tspan></text>
+  <text class="st1" transform="translate(731.07 248.82)"><tspan x="0" y="0">60%</tspan></text>
+  <text class="st1" transform="translate(731.16 205.65)"><tspan x="0" y="0">70%</tspan></text>
+  <text class="st1" transform="translate(730.99 162.57)"><tspan x="0" y="0">80%</tspan></text>
+  <text class="st1" transform="translate(730.99 119.32)"><tspan x="0" y="0">90%</tspan></text>
+  <text class="st1" transform="translate(730.92 75.93)"><tspan x="0" y="0">100%</tspan></text>
+  <text class="st0" transform="translate(167.8 528.35) rotate(-45)"><tspan x="0" y="0">Car</tspan></text>
+  <text class="st0" transform="translate(316.82 532.83) rotate(-45)"><tspan x="0" y="0">Train</tspan></text>
+  <text class="st0" transform="translate(465.19 538.4) rotate(-45)"><tspan x="0" y="0">Bicycle</tspan></text>
+  <text class="st0" transform="translate(615.74 541.57) rotate(-45)"><tspan x="0" y="0">Walking</tspan></text>
+  <polyline class="st4" points="176.59 280.12 330.61 142.2 484.43 90.02 638.45 72.95"/>
+  <circle class="st2" cx="330.93" cy="141.96" r="2.62"/>
+  <circle class="st2" cx="484.57" cy="90.04" r="2.62"/>
+  <polygon class="st5" points="107.7 504.01 107.7 280.18 246.12 280.18 246.12 504.3 107.7 504.01"/>
+  <circle class="st2" cx="638.43" cy="73.07" r="2.62"/>
+  <circle class="st2" cx="177.01" cy="280.02" r="2.62"/>
+  <polygon class="st5" points="261.71 504.13 261.71 366.63 400.13 366.63 400.13 504.3 261.71 504.13"/>
+  <polygon class="st5" points="415.33 504.15 415.33 452.96 553.75 452.96 553.75 504.21 415.33 504.15"/>
+  <polygon class="st5" points="569.17 504.27 569.17 487.37 707.59 487.37 707.59 504.29 569.17 504.27"/>
 </svg>

@@ -6,15 +6,16 @@ export const dimensions = [
     required: true,
   },
   {
+    id: 'y',
+    name: 'Y axis',
+    hover: 'asdf',
+    validTypes: ['number', 'string', 'date'],
+    required: true,
+  },
+  {
     id: 'x2',
     name: 'Right Side',
     validTypes: ['number'],
     required: true,
   },
-  {
-    id: 'y',
-    name: 'Y axis',
-    validTypes: ['number', 'string', 'date'],
-    required: true,
-  }
 ]

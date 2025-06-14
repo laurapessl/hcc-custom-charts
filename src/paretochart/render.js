@@ -18,7 +18,7 @@ export function render(
     marginLeft,
     marginRight,
     padding,
-    colorScale1,
+    barColor,
     cumulativeLineColor,
     axisLeftLabel,
     axisLeftLabelVisible,
@@ -104,7 +104,7 @@ export function render(
     .attr('width', xScale.bandwidth())
     .attr('y', d => yScale(d.value))
     .attr('height', d => boundHeight - yScale(d.value))
-    .attr('fill', d => colorScale1(d.category))
+    .attr('fill', d => barColor)
 
   // Left y axis (values)
   if (axisLeftLabelVisible) {

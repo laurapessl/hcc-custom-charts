@@ -16,22 +16,25 @@
     "prebuild": "rimraf lib",
     "build": "rollup -c"
   },
-  "author": {
+  "authors": [
+    {
+        "url": "https://github.com/laurapessl",
+        "name": "laurapessl"
+    },
+    {
+        "url": "https://github.com/bkandlbauer",
+        "name": "bkandlbauer"
+    },
+    {
+        "url": "https://github.com/theplanetarpelican",
+        "name": "theplanetarpelican"
+    }
+  ],
+  "contributors": [
+  
+    {
     "url": "https://github.com/blindguardian50",
     "name": "blindguardian50"
-  },
-  "contributors": [
-    {
-      "url": "https://github.com/laurapessl",
-      "name": "laurapessl"
-    },
-    {
-      "url": "https://github.com/bkandlbauer",
-      "name": "bkandlbauer"
-    },
-    {
-      "url": "https://github.com/theplanetarpelican",
-      "name": "theplanetarpelican"
     },
     {
       "url": "https://github.com/steve1711",
