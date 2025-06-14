@@ -14,13 +14,13 @@
       }
     </style>
   </defs>
-  <rect class="st1" x="6.91" y="25.26" width="6.5" height="10.88"/>
-  <polyline class="st0" points="12.75 23.82 19.38 16.4 27.06 10.91 34.89 8.09"/>
-  <rect class="st1" x="5.39" y="5.26" width=".8" height="32.38"/>
-  <polygon class="st1" points="4.43 6.76 5.78 5.36 7.14 6.76 7.14 5.56 5.78 4.16 4.43 5.56 4.43 6.76"/>
-  <rect class="st1" x="5.43" y="36.84" width="31.34" height=".82"/>
-  <polygon class="st1" points="35.18 35.85 36.54 37.26 35.18 38.66 36.33 38.66 37.69 37.26 36.33 35.85 35.18 35.85"/>
-  <rect class="st1" x="14" y="28" width="6.5" height="8.16"/>
-  <rect class="st1" x="21.11" y="29.25" width="6.5" height="6.93"/>
-  <rect class="st1" x="28.15" y="33.22" width="6.5" height="2.96"/>
+  <rect class="st1" x="9.06" y="24.05" width="5.39" height="9.03"/>
+  <polyline class="st0" points="13.91 22.85 19.41 16.69 25.78 12.14 32.28 9.8"/>
+  <rect class="st1" x="7.8" y="7.45" width=".66" height="26.87"/>
+  <polygon class="st1" points="7 8.69 8.12 7.53 9.25 8.69 9.25 7.7 8.12 6.54 7 7.7 7 8.69"/>
+  <rect class="st1" x="7.83" y="33.66" width="26.01" height=".68"/>
+  <polygon class="st1" points="32.52 32.84 33.65 34.01 32.52 35.17 33.48 35.17 34.6 34.01 33.48 32.84 32.52 32.84"/>
+  <rect class="st1" x="14.94" y="26.32" width="5.39" height="6.77"/>
+  <rect class="st1" x="20.84" y="27.36" width="5.39" height="5.75"/>
+  <rect class="st1" x="26.69" y="30.65" width="5.39" height="2.46"/>
 </svg>

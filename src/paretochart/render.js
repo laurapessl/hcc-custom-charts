@@ -50,13 +50,14 @@ export function render(
 
   // Compute cumulative percentages
   const total = d3.sum(aggregatedData, d => d[1])
-  let cumulativeSum = 0
+  let cumulativeValues = 0
   const paretoData = aggregatedData.map(([category, value]) => {
-    cumulativeSum += value
+    cumulativeValues += value
     return {
       category,
       value,
-      cumulative: cumulativeSum / total,
+      cumulative: cumulativeValues / total,
+      cumulativeSum: cumulativeValues,
     }
   })
 
@@ -85,9 +86,8 @@ export function render(
 
   const yScale = d3
     .scaleLinear()
-    .domain([0, d3.max(paretoData, d => d.value)])
+    .domain([0, d3.max(paretoData, d => d.cumulativeSum)])
     .range([boundHeight, 0])
-    .nice()
 
   const yScaleRight = d3
     .scaleLinear()
@@ -118,7 +118,7 @@ export function render(
       .text(axisLeftLabel)
   }
 
-  const yAxisLeft = d3.axisLeft(yScale).ticks(5).tickFormat(d3.format('~s'))
+  const yAxisLeft = d3.axisLeft(yScale).ticks(5).tickFormat((d3.format('~s')))
   bounds.append('g').call(yAxisLeft)
 
   // Bottom x axis (categories)
@@ -157,7 +157,7 @@ export function render(
 
   const yAxisRight = d3
     .axisRight(yScaleRight)
-    .ticks(5)
+    .ticks(10)
     .tickFormat(d3.format('.0%'))
 
   bounds

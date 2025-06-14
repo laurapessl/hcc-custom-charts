@@ -22,7 +22,7 @@ export const visualOptions = {
   axisLeftLabel: {
     type: 'text',
     label: 'Left (value) axis label override',
-    default: 'Value',
+    default: 'Values',
     group: 'axis',
   },
 
@@ -50,7 +50,7 @@ export const visualOptions = {
   axisBottomLabel: {
     type: 'text',
     label: 'Bottom (categories) axis label override',
-    default: '',
+    default: 'Categories',
     group: 'axis',
   },
 
