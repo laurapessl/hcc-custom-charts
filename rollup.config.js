@@ -25,27 +25,33 @@ const makeExternalPredicate = (externalArr) => {
   return (id) => pattern.test(id)
 }
 
-export default ['esm', 'cjs', 'umd'].map((format) => ({
-  input: {
-    index: 'src/index.js',
+const chartEntries = {
+  index: 'src/index.js',
+    barchartparied: 'src/barchartpaired/index.js',
+    bulletchart: 'src/bulletchart/index.js',
+    connectedscatterplot: 'src/connectedscatterplot/index.js',
+    paretochart: 'src/paretochart/index.js',
+    polarareadiagram: 'src/polarareadiagram/index.js',
+    similaritymap: 'src/similaritymap/index.js',
+    sunburst: 'src/sunburst/index.js'
+}
+
+// UMD builds — single entry per chart, no code splitting
+const umdBuilds = Object.entries(chartEntries).map(([name, inputFile]) => ({
+  input: inputFile,
+  output: {
+    file: `lib/hcc-custom-charts-${name}.umd.js`,
+    format: 'umd',
+    name: `RawCharts_${name}`,
+    exports: 'named',
   },
-  output: [
-    {
-      dir: 'lib',
-      entryFileNames: 'hcc-custom-charts.[format].js',
-      exports: 'named',
-      name: 'rawcharts',
-      format,
-    },
-  ],
-  external: format === 'umd' ? undefined : makeExternalPredicate(vendors),
+  external: [], // bundle dependencies inside UMD
   plugins: [
     localResolve(),
     commonjs(),
     image(),
     babel({
       exclude: 'node_modules/**',
-      // TODO: Maybe check this
       babelHelpers: 'bundled',
     }),
     rawGraphCss({
@@ -55,12 +61,9 @@ export default ['esm', 'cjs', 'umd'].map((format) => ({
       include: '**/styles/*.css',
       exclude: '**/styles/*.raw.css',
     }),
-  ].concat(
-    format == 'umd'
-      ? [
-          resolve(),
-          terser()
-        ]
-      : []
-  ),
+    resolve(),
+    terser(),
+  ],
 }))
+
+export default [...umdBuilds]

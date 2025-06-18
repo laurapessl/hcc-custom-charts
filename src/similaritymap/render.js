@@ -8,7 +8,7 @@ import PCAAnalysis from '../PCA';
 import UMAPAnalysis from '../UMAP';
 import '../d3-styles.js';
 
-export function render(node, data, visualOptions, mapping) {
+export function render(node, data, visualOptions, mapping, styles) {
   // Destructure visualOptions
   const {
     width,

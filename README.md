@@ -18,6 +18,55 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
    ```
    yarn install
    ```
+   
+# Create a Bundle for RAWGraphs
+
+If you are satisfied with your project, you can build the JavaScript bundle to be used in the RAWGraphs interface.
+
+1. Go to the repository:
+
+   📂 yourfolder  
+    ├── 📁 `hcc-custom-charts/`  
+    └── 📁 `rawgraphs-app/`
+
+   ```
+   cd hcc-custom-charts
+   ```
+
+2. Build the project
+   ```
+   yarn build
+   ```
+3. This will generate a folder named `lib/` in `hcc-custom-charts/`, in which you will find a umd.js file for each of your charts, as well as the hcc-custom-charts-index.umd.js file, which is a bundle of all charts together:
+
+   📂 yourfolder  
+    ├── 📁 `hcc-custom-charts/`  
+    <span style="color: transparent;">├──</span>└── 📁 `lib/`  
+    <span style="color: transparent;">├──├──</span>└── `hcc-custom-charts-index.umd.js`  
+    <span style="color: transparent;">├──├──</span>└── `hcc-custom-charts-<yourchart>.umd.js`   
+    <span style="color: transparent;">├──├──</span>└── `...`   
+    └── 📁 `rawgraphs-app/`
+
+   Those files can now be loaded with RAWGraphs.
+
+# Upload the bundle to RAWGraphs
+
+The following steps can be executed on the local RAWGraphs app, as well as on https://app.rawgraphs.io.
+
+1. Load your your data  
+   Either upload your own dataset, or chose a dataset from `Try our data samples`
+
+![Try our data samples](images/datasample.png)
+
+3. Choose a chart  
+   At the end of the section, choose `Load custom chart`
+
+![Load custom chart](images/addyourchart.png)
+
+4. Load custom chart  
+   Select your `hcc-custom-charts-<yourchart>.umd.js` file.
+
+![select your file](images/addcustomchart.png)
 
 # Run the project
 
@@ -38,55 +87,6 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
    ```
    yarn link
    ```
-
-# Create a Bundle for RAWGraphs
-
-If you are satisfied with your project, you can build the JavaScript bundle to be used in the RAWGraphs interface.
-
-1. Go to the repository:
-
-   📂 yourfolder  
-    ├── 📁 `hcc-custom-charts/`  
-    └── 📁 `rawgraphs-app/`
-
-   ```
-   cd hcc-custom-charts
-   ```
-
-2. Build the project
-   ```
-   yarn build
-   ```
-3. This will generate a folder named `lib/` in `hcc-custom-charts/`, in which you will find three files:
-
-   📂 yourfolder  
-    ├── 📁 `hcc-custom-charts/`  
-    <span style="color: transparent;">├──</span>└── 📁 `lib/`  
-    <span style="color: transparent;">├──├──</span>├── `hcc-custom-charts.cjs.js`  
-    <span style="color: transparent;">├──├──</span>├── `hcc-custom-charts.es.js`  
-    <span style="color: transparent;">├──├──</span>└── `hcc-custom-charts.umd.js`  
-    └── 📁 `rawgraphs-app/`
-
-   The `hcc-custom-charts.umd.js` file can now be loaded with RAWGraphs.
-
-# Upload the bundle to RAWGraphs
-
-The following steps can be executed on the local RAWGraphs app, as well as on https://app.rawgraphs.io.
-
-1. Load your your data  
-   Either upload your own dataset, or chose a dataset from `Try our data samples`
-
-![Try our data samples](images/datasample.png)
-
-3. Choose a chart  
-   At the end of the section, choose `Load custom chart`
-
-![Load custom chart](images/addyourchart.png)
-
-4. Load custom chart  
-   Select your `<name>.umd.js` file.
-
-![select your file](images/addcustomchart.png)
 
 ### RawGraphs App
 

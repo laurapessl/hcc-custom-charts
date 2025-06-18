@@ -140,6 +140,7 @@ export const visualOptions = {
     type: 'colorScale',
     label: 'Color left axis',
     dimension: 'x1',
+    dimensionId: 'x1',
     default: {
       scaleType: 'sequential',
       interpolator: 'interpolateBlues',
@@ -151,6 +152,7 @@ export const visualOptions = {
     type: 'colorScale',
     label: 'Color right axis',
     dimension: 'x2',
+    dimensionId: 'x2',
     default: {
       scaleType: 'sequential',
       interpolator: 'interpolateReds',
