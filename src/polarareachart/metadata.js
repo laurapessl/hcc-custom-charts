@@ -1,9 +1,9 @@
-import thumbnail from "./polarareadiagram_thumb.svg";
-import icon from "./polarareadiagram.svg";
+import thumbnail from "./polarareachart_thumb.svg";
+import icon from "./polarareachart.svg";
 
 export const metadata = {
-  name: 'Polar Area Diagram',
-  id: 'rawgraphs.polarareadiagram',
+  name: 'Polar Area Chart',
+  id: 'rawgraphs.polarareachart',
   thumbnail,
   icon,
   categories: ['hierarchies', 'proportions'],

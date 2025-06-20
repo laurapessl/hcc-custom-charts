@@ -26,7 +26,13 @@ export const visualOptions = {
     default: 10,
     group: 'artboard',
   },
-
+  // Title
+  title: {
+    type: 'text',
+    label: 'Chart Title',
+    default: 'Polar Area Diagram',
+    group: 'chart',
+  },
   showLegend: {
     type: 'boolean',
     label: 'Show legend',
@@ -51,19 +57,26 @@ export const visualOptions = {
   padding: {
     type: 'number',
     label: 'Padding',
-    default: 2,
+    default: 1,
+    group: 'chart',
+  },
+
+  rotation: {
+    type: 'number',
+    label: 'Rotation',
+    default: 0,
     group: 'chart',
   },
 
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
-    dimension: 'color',
+    dimension: 'category',
     default: {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
     },
-    group: 'colors',
+    group: 'category',
   },
 
   showHierarchyLabels: {

@@ -6,9 +6,11 @@ import { scaleLinear } from 'd3-scale';
 import { allTSNEE } from "../tsne";
 import PCAAnalysis from '../PCA';
 import UMAPAnalysis from '../UMAP';
+import runForceDirectedLayout from '../FDP';
 import '../d3-styles.js';
 
 export function render(node, data, visualOptions, mapping, styles) {
+  console.error("In render function");
   // Destructure visualOptions
   const {
     width,
@@ -92,19 +94,31 @@ export function render(node, data, visualOptions, mapping, styles) {
   //   }
 
   //   reducedDimensionsClassified = reducedDimensions.map((e, i) => {
-  //     let classification = undefined;
+  //     let groups = undefined;
   //     let label = undefined;
-  //     if (data[i] && data[i].classification) {
-  //       classification = data[i].classification;
+  //     if (data[i] && data[i].groups) {
+  //       groups = data[i].groups;
   //     }
   //     if (data[i] && data[i].labels) {
   //       label = data[i].labels;
   //     }
-  //     return { reducedDimension: e, classification, label };
+  //     return { reducedDimension: e, groups, label };
   //   });
 
   //   return { reducedDimensions, reducedDimensionsClassified };
   // }
+
+  function computeLinks(data) {
+    //k-nearest neighbors?? how to connect data?
+    const links = [];
+    const k = 5;
+    for (let i = 0; i < data.length; i++) {
+      for (let j = i + 1; j < i + k + 1 && j < data.length; j++) {
+        links.push({ source: i, target: j });
+      }
+    }
+    return links;
+  }  
 
   // Change TSNE initialization to be based on PCA" :
   function calcReducedDimensions() {
@@ -117,6 +131,21 @@ export function render(node, data, visualOptions, mapping, styles) {
     } else if (analysisMethod === 'UMAP') {
       const umap = new UMAPAnalysis();
       reducedDimensions = umap.fit(dimensionsData);
+    } else if(analysisMethod === 'FDP') {
+      const nodes = data.map((d,i) => ({id: i}));
+      const links = computeLinks(data);
+      console.log("links = ");
+      console.log(links);
+      console.log("Nodes =");
+      console.log(nodes);
+      const result = runForceDirectedLayout(nodes, links, width, height);
+      console.log("Result =");
+      console.log(result);
+      reducedDimensions = result;
+      /*return {
+        reducedDimensions: result.map(d => [d.x, d.y]),
+        reducedDimensionsClassified: result.map((d,i) => [d.x, d.y, data[i].label])
+      };*/
     } else { // default to TSNE
       const pca = new PCAAnalysis();
       const pcaResult = pca.fit(dimensionsData); // Perform PCA first
@@ -133,15 +162,15 @@ export function render(node, data, visualOptions, mapping, styles) {
     }
   
     reducedDimensionsClassified = reducedDimensions.map((e, i) => {
-      let classification = undefined;
+      let groups = undefined;
       let label = undefined;
-      if (data[i] && data[i].classification) {
-        classification = data[i].classification;
+      if (data[i] && data[i].groups) {
+        groups = data[i].groups;
       }
       if (data[i] && data[i].labels) {
         label = data[i].labels;
       }
-      return { reducedDimension: e, classification, label };
+      return { reducedDimension: e, groups, label };
     });
   
     return { reducedDimensions, reducedDimensionsClassified };
@@ -235,7 +264,7 @@ export function render(node, data, visualOptions, mapping, styles) {
       .attr("cx", d => xScale(xAccessor(d.reducedDimension)))
       .attr("cy", d => yScale(yAccessor(d.reducedDimension)))
       .attr("r", dotsRadius)
-      .attr("fill", d => d.classification ? colorScale(d.classification) : "#0365a8")
+      .attr("fill", d => d.groups ? colorScale(d.groups) : "#0365a8")
       .on('mouseover', mouseOver)
       .on('mouseout', mouseOut);
 

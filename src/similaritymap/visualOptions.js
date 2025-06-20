@@ -42,6 +42,7 @@ export const visualOptions = {
             { label: 'PCA', value: 'PCA' },
             { label: 'UMAP', value: 'UMAP' },
             { label: 't-SNE', value: 'TSNE' },
+            { label: 'FDP', value: 'FDP' },
         ],
         default: 'PCA',
         group: 'Dimensionality Reduction',
@@ -80,7 +81,7 @@ export const visualOptions = {
     colorScale: {
         type: 'colorScale',
         label: 'Color scale',
-        dimension: 'classification',
+        dimension: 'groups',
         default: {
             scaleType: 'ordinal',
             interpolator: 'interpolateSpectral',

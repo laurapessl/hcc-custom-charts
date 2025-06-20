@@ -1,6 +1,6 @@
 export { default as similaritymap } from './similaritymap'
 export { default as connectedscatterplot } from './connectedscatterplot'
-export { default as polarareadiagram } from './polarareadiagram'
+export { default as polarareachart } from './polarareachart'
 export { default as barchartpaired } from './barchartpaired'
 export { default as paretochart } from './paretochart'
 export { default as bulletchart } from './bulletchart'

@@ -31,9 +31,8 @@ const chartEntries = {
     bulletchart: 'src/bulletchart/index.js',
     connectedscatterplot: 'src/connectedscatterplot/index.js',
     paretochart: 'src/paretochart/index.js',
-    polarareadiagram: 'src/polarareadiagram/index.js',
     similaritymap: 'src/similaritymap/index.js',
-    sunburst: 'src/sunburst/index.js'
+    polarareachart: 'src/polarareachart/index.js'
 }
 
 // UMD builds — single entry per chart, no code splitting

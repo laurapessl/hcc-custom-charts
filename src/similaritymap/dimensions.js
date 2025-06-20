@@ -16,8 +16,8 @@ export const dimensions = [
   },
 
   {
-    id: 'classification',
-    name: 'Classification',
+    id: 'groups',
+    name: 'Groups',
     validTypes: ['string', 'number'],
     required: false,
   },

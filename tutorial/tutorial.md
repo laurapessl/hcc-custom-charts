@@ -20,7 +20,7 @@ Your folder structure should look like this:
     // index.js
     export { default as similaritymap } from './similaritymap'
     export { default as connectedscatterplot } from './connectedscatterplot'
-    export { default as polarareadiagram } from './polarareadiagram'
+    export { default as polarareachart } from './polarareachart'
 
     // add your chart
     export { default as <your-chart-name> } from './<your-chart-name>'

@@ -68,6 +68,6 @@ In RAWGraphs, choose the following data mapping:
 Feel free to swap the dimensions to the ones you are interested in. In the `Customize` section of RAWGraphs under `Dimensionality Reduction` you can choose one of three reduction methods which are PCA, UMAP and t-SNE.
 
 
-# Sunburst
+# Polar Area Chart
 
-A sunburst chart is a radial visualization that shows hierarchical data. Each ring represents a level in the hierarchy, with segments sized proportionally to their values.
+A polar area chart chart is a radial visualization that shows hierarchical data. Each ring represents a level in the hierarchy, with segments sized proportionally to their values.
