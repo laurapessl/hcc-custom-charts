@@ -1,4 +1,7 @@
 export const visualOptions = {
+  //Width + Height is automatically added by RAWGraphs
+  //Background is automatically added by RAWGraphs
+
   marginTop: {
     type: 'number',
     label: 'Margin (top)',
@@ -9,30 +12,25 @@ export const visualOptions = {
   marginRight: {
     type: 'number',
     label: 'Margin (right)',
-    default: 10,
+    default: 0,
     group: 'artboard',
   },
 
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 10,
+    default: 0,
     group: 'artboard',
   },
 
   marginLeft: {
     type: 'number',
     label: 'Margin (left)',
-    default: 10,
+    default: 0,
     group: 'artboard',
   },
-  // Title
-  title: {
-    type: 'text',
-    label: 'Chart Title',
-    default: 'Polar Area Diagram',
-    group: 'chart',
-  },
+
+  //Legend
   showLegend: {
     type: 'boolean',
     label: 'Show legend',
@@ -43,7 +41,7 @@ export const visualOptions = {
   legendWidth: {
     type: 'number',
     label: 'Legend width',
-    default: 200,
+    default: 50,
     group: 'artboard',
     disabled: {
       showLegend: false,
@@ -54,10 +52,25 @@ export const visualOptions = {
     },
   },
 
-  padding: {
+  legendHeight: {
     type: 'number',
-    label: 'Padding',
-    default: 1,
+    label: 'Legend height',
+    default: 50,
+    group: 'artboard',
+    disabled: {
+      showLegend: false,
+    },
+    container: 'height',
+    containerCondition: {
+      showLegend: true,
+    },
+  },
+
+  // Title
+  title: {
+    type: 'text',
+    label: 'Chart Title',
+    default: 'Polar Area Chart',
     group: 'chart',
   },
 
@@ -65,6 +78,13 @@ export const visualOptions = {
     type: 'number',
     label: 'Rotation',
     default: 0,
+    group: 'chart',
+  },
+
+  outlineThickness: {
+    type: 'number',
+    label: 'Outline Thickness',
+    default: 1.5,
     group: 'chart',
   },
 
@@ -78,54 +98,11 @@ export const visualOptions = {
     },
     group: 'category',
   },
-
-  showHierarchyLabels: {
+  
+  showLabels: {
     type: 'boolean',
-    label: 'Show hierarchy labels',
+    label: 'Show labels',
     default: true,
     group: 'labels',
-  },
-
-  labelHierarchyStyle: {
-    type: 'text',
-    label: 'Hierarchy labels',
-    group: 'labels',
-    options: [
-      { label: 'Primary', value: 'labelPrimary' },
-      { label: 'Secondary', value: 'labelSecondary' },
-      { label: 'Italic', value: 'labelItalic' },
-    ],
-    default: 'labelItalic',
-    disabled: {
-      showHierarchyLabels: false,
-    },
-  },
-
-  labelStyles: {
-    type: 'text',
-    label: 'Label',
-    group: 'labels',
-    options: [
-      { label: 'Primary', value: 'labelPrimary' },
-      { label: 'Secondary', value: 'labelSecondary' },
-      { label: 'Italic', value: 'labelItalic' },
-    ],
-    default: 'labelPrimary',
-    repeatFor: 'label',
-    repeatDefault: ['labelPrimary', 'labelSecondary', 'labelItalic'],
-  },
-
-  showLabelsOutline: {
-    type: 'boolean',
-    label: 'Show outline',
-    default: false,
-    group: 'labels',
-  },
-
-  autoHideLabels: {
-    type: 'boolean',
-    label: 'Auto hide labels',
-    default: false,
-    group: 'labels',
-  },
+  }
 }

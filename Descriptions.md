@@ -49,7 +49,7 @@ In RAWGraphs, choose the following data mapping:
 
 <img src="images/pareto-mapping.png" alt="Chart" width="600"/>
 
-# Polar Area Diagram
+# Polar Area Chart
 
 # Similarity Map
 

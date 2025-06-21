@@ -40,7 +40,7 @@ This dataset is licensed under a Creative Commons Attribution 4.0 International 
 
 This allows for the sharing and adaptation of the datasets for any purpose, provided that the appropriate credit is given.
 
-## Polar Area Diagram - Nightingale's Rose Data
+## Polar Area Chart - Nightingale's Rose Data
 
 - nightingale-data.csv
 
@@ -48,7 +48,7 @@ https://github.com/tulsyanp/data-visualization-d3-js-nightingale-rose-chart/tree
 
 There is no licence information.
 
-## Polar Area Diagram - Global Land Temperatures by Country
+## Polar Area Chart - Global Land Temperatures by Country
 
 - GlobalLandTemperaturesByCountry.csv
 

@@ -207,6 +207,6 @@ Supervisor: [@kandrews99](https://github.com/kandrews99).
 
 Original code and template for Similarity Map by [@blindguardian50](https://github.com/blindguardian50) [@steve1711](https://github.com/steve1711), [@TheAlmightySpaceWarrior](https://github.com/TheAlmightySpaceWarrior), [@wizardry8](https://github.com/wizardry8).
 
-Final implementation of Similarity Map and original code for Connected Scatterplot, Polar Area Diagram by [@solidth](https://github.com/solidth), [@hezojez](https://github.com/hezojez) and [@Ramadan877](https://github.com/Ramadan877).
+Final implementation of Similarity Map and original code for Connected Scatterplot by [@solidth](https://github.com/solidth), [@hezojez](https://github.com/hezojez) and [@Ramadan877](https://github.com/Ramadan877).
 
-Extensions added to Connected Scatterplot, Similarity Map and finalization of Polar Area Diagram as well as implementation of Bullet and Pareto Chart by [@bkandlbauer](https://github.com/bkandlbauer), [@theplanetarpelican](https://github.com/theplanetarpelican) and [@laurapessl](https://github.com/laurapessl).
+Extensions added to Connected Scatterplot and Similarity Map as well as implementation of Bullet Chart, Polar Area Chart and Pareto Chart by [@bkandlbauer](https://github.com/bkandlbauer), [@theplanetarpelican](https://github.com/theplanetarpelican) and [@laurapessl](https://github.com/laurapessl).

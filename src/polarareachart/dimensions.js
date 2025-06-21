@@ -4,7 +4,7 @@ export const dimensions = [
     name: 'months',
     validTypes: ['string'],
     required: true,
-    multiple: true,
+    multiple: false,
   },
   {
     id: 'years',
@@ -12,7 +12,7 @@ export const dimensions = [
     validTypes: ['number'],
     aggregation: false,
     required: true,
-    multiple: true,
+    multiple: false,
   },
   {
     id: 'value',
@@ -27,6 +27,6 @@ export const dimensions = [
     name: 'Category',
     validTypes: ['string'],
     required: false,
-    multiple: true,
+    multiple: false,
   },
 ];
