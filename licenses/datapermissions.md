@@ -40,20 +40,37 @@ This dataset is licensed under a Creative Commons Attribution 4.0 International 
 
 This allows for the sharing and adaptation of the datasets for any purpose, provided that the appropriate credit is given.
 
-## Polar Area Chart - Nightingale's Rose Data
+## Similarity Map - Cereals Dataset
 
-- nightingale-data.csv
+- cereals.csv
 
-https://github.com/tulsyanp/data-visualization-d3-js-nightingale-rose-chart/tree/master
+https://www.kaggle.com/datasets/semakulapaul/cereals-dataset
+
+CCO Public Domain: The person who associated a work with this deed has dedicated the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.
+You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission.
+
+## ???? - Iris Flower Data
+
+- iris.csv
+
+https://archive.ics.uci.edu
+
+Creative Commons Attribution 4.0 (CC BY 4.0): This allows for the sharing and adaptation of the datasets for any purpose, provided that the appropriate credit is given.
+
+Fisher, R. (1936). Iris [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C56C76.
+
+## ???? - Cars 1993 Dataset
+
+- 
+
+## Polar Area Chart - Florence Nightingale's Data on Deaths
+
+- nightingale.csv
+
+https://www.kaggle.com/datasets/ukveteran/florence-nightingales-data-on-deaths
+
+Kaggle Owner: Johar M. Ashfaque
 
 There is no licence information.
 
-## Polar Area Chart - Global Land Temperatures by Country
-
-- GlobalLandTemperaturesByCountry.csv
-
-https://www.kaggle.com/datasets/vijayvvenkitesh/global-land-temperatures-by-country
-
-CC0: Public Domain
-The person who associated a work with this deed has dedicated the work to the public domain by waiving all of his or her rights to the work worldwide under copyright law, including all related and neighboring rights, to the extent allowed by law.
-You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. See Other Information below. 
+## Polar Area Chart - 

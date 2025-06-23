@@ -27,7 +27,7 @@ const makeExternalPredicate = (externalArr) => {
 
 const chartEntries = {
   index: 'src/index.js',
-    barchartparied: 'src/barchartpaired/index.js',
+    barchartpaired: 'src/barchartpaired/index.js',
     bulletchart: 'src/bulletchart/index.js',
     connectedscatterplot: 'src/connectedscatterplot/index.js',
     paretochart: 'src/paretochart/index.js',
