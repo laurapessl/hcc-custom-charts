@@ -1,14 +1,14 @@
 export const dimensions = [
   {
     id: 'measure',
-    name: 'Measure',
+    name: 'Current Value',
     validTypes: ['number'],
     required: true,
     description: 'The actual performance value to display'
   },
   {
     id: 'target',
-    name: 'Target',
+    name: 'Target Value',
     validTypes: ['number'],
     required: false,
     description: 'The target value to compare against'

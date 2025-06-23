@@ -29,8 +29,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
   const innerWidth = width - marginLeft - marginRight
   
   const svg = d3.select(svgNode)
-    .attr('width', width)
-    .attr('height', totalHeight)
+    .attr('viewBox', `0 0 ${width} ${totalHeight}`)
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('preserveAspectRatio', 'xMidYMid meet');
   
   const g = svg.append('g')
     .attr('transform', `translate(${marginLeft},${marginTop})`)
@@ -85,14 +87,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
         .attr('width', xScale(range))
         .attr('height', chartHeight)
         .attr('fill', rangeColors[colorIndex])
-        .attr('opacity', 0.7)
+        .attr('opacity', 0.5)
         .attr('stroke', '#fff')
         .attr('stroke-width', 0.5)
     })
     
     chartGroup.append('rect')
       .attr('class', 'measure')
-      .attr('x', 0)
+      .attr('x', 1)
       .attr('y', chartHeight * 0.25)
       .attr('width', xScale(d.measure))
       .attr('height', chartHeight * 0.5)
@@ -119,7 +121,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
       .attr('text-anchor', 'end')
       .attr('dominant-baseline', 'middle')
       .text(d.label)
-      .style('font-size', '12px')
+      .style('font-size', '12')
       .style('font-weight', 'bold')
       .style('fill', '#333')
     
@@ -130,7 +132,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
         .attr('y', chartHeight / 2)
         .attr('dominant-baseline', 'middle')
         .text(d3.format(',.0f')(d.measure))
-        .style('font-size', '10px')
+        .style('font-size', '10')
         .style('font-weight', 'bold')
         .style('fill', measureColor)
     }
@@ -157,7 +159,7 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
         .attr('y', chartHeight / 2)
         .attr('dominant-baseline', 'middle')
         .text(performanceText)
-        .style('font-size', '10px')
+        .style('font-size', '10')
         .style('font-weight', 'bold')
         .style('fill', performanceColor)
     }
@@ -182,20 +184,9 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
           .attr('y', chartHeight + 18)
           .attr('text-anchor', 'middle')
           .text(d3.format(',.0f')(tick))
-          .style('font-size', '10px')
+          .style('font-size', '10')
           .style('fill', '#666')
       })
     }
   })
-  
-  if (processedData.length > 1) {
-    svg.append('text')
-      .attr('x', width / 2)
-      .attr('y', 15)
-      .attr('text-anchor', 'middle')
-      .text(`Performance Dashboard (${processedData.length} metrics)`)
-      .style('font-size', '14px')
-      .style('font-weight', 'bold')
-      .style('fill', '#333')
-  }
 }

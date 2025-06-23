@@ -1,7 +1,7 @@
 export const visualOptions = {
   width: {
     type: 'number',
-    label: 'Chart Width',
+    label: 'Width (px)',
     default: 600,
     group: 'artboard'
   },
