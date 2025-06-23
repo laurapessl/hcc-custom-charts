@@ -11,6 +11,8 @@ import '../d3-styles.js';
 
 export function render(node, data, visualOptions, mapping, styles) {
   console.error("In render function");
+  let fdpLinks = [];
+  let fdpNodes = [];
   // Destructure visualOptions
   const {
     width,
@@ -47,6 +49,7 @@ export function render(node, data, visualOptions, mapping, styles) {
   const bounds = createBounds();
   const { xScale, yScale } = createScales();
   const { xAxis, yAxis } = createAxes();
+  drawLinks();
   const { dots } = drawScatterPoints();
 
   function calcProps() {
@@ -94,15 +97,15 @@ export function render(node, data, visualOptions, mapping, styles) {
   //   }
 
   //   reducedDimensionsClassified = reducedDimensions.map((e, i) => {
-  //     let groups = undefined;
+  //     let category = undefined;
   //     let label = undefined;
-  //     if (data[i] && data[i].groups) {
-  //       groups = data[i].groups;
+  //     if (data[i] && data[i].category) {
+  //       category = data[i].category;
   //     }
   //     if (data[i] && data[i].labels) {
   //       label = data[i].labels;
   //     }
-  //     return { reducedDimension: e, groups, label };
+  //     return { reducedDimension: e, category, label };
   //   });
 
   //   return { reducedDimensions, reducedDimensionsClassified };
@@ -131,21 +134,55 @@ export function render(node, data, visualOptions, mapping, styles) {
     } else if (analysisMethod === 'UMAP') {
       const umap = new UMAPAnalysis();
       reducedDimensions = umap.fit(dimensionsData);
-    } else if(analysisMethod === 'FDP') {
-      const nodes = data.map((d,i) => ({id: i}));
-      const links = computeLinks(data);
-      console.log("links = ");
-      console.log(links);
-      console.log("Nodes =");
-      console.log(nodes);
+    } else if (analysisMethod === 'FDP') {
+      const dataNodes = data.map((d, i) => ({
+        id: i,
+        type: 'data',
+        ...d
+      }));
+    
+      const offset = dataNodes.length;
+      //create a "root" node for the category
+      const uniqueCategories = [...new Set(data.map(d => d.category))];
+      const categoryNodes = uniqueCategories.map((category, i) => ({
+        id: offset + i,
+        type: 'category',
+        category
+      }));
+    
+      const nodes = [...dataNodes, ...categoryNodes];
+    
+      const categoryIdMap = new Map();
+      uniqueCategories.forEach((category, i) => {
+        categoryIdMap.set(category, data.length + i);
+      });
+    
+      const links = data.map((d, i) => ({
+        source: i,
+        target: categoryIdMap.get(d.category)
+      }));
+    
       const result = runForceDirectedLayout(nodes, links, width, height);
-      console.log("Result =");
-      console.log(result);
-      reducedDimensions = result;
-      /*return {
-        reducedDimensions: result.map(d => [d.x, d.y]),
-        reducedDimensionsClassified: result.map((d,i) => [d.x, d.y, data[i].label])
-      };*/
+
+      const positionedNodes = nodes.map((node, i) => ({
+        ...node,
+        x: result[i].x,
+        y: result[i].y
+      }));
+
+      fdpLinks = links;
+      fdpNodes = positionedNodes;
+    
+      data = nodes;
+      reducedDimensions = result.slice(0, data.length).map(d => [d.x, d.y]);
+     
+      reducedDimensionsClassified = reducedDimensions.map((coords, i) => {
+        const category = data[i]?.category;
+        const label = data[i]?.label || data[i]?.labels;
+        return { reducedDimension: coords, category, label };
+      });
+    
+      return { reducedDimensions, reducedDimensionsClassified };    
     } else { // default to TSNE
       const pca = new PCAAnalysis();
       const pcaResult = pca.fit(dimensionsData); // Perform PCA first
@@ -162,15 +199,15 @@ export function render(node, data, visualOptions, mapping, styles) {
     }
   
     reducedDimensionsClassified = reducedDimensions.map((e, i) => {
-      let groups = undefined;
+      let category = undefined;
       let label = undefined;
-      if (data[i] && data[i].groups) {
-        groups = data[i].groups;
+      if (data[i] && data[i].category) {
+        category = data[i].category;
       }
       if (data[i] && data[i].labels) {
         label = data[i].labels;
       }
-      return { reducedDimension: e, groups, label };
+      return { reducedDimension: e, category, label };
     });
   
     return { reducedDimensions, reducedDimensionsClassified };
@@ -264,10 +301,27 @@ export function render(node, data, visualOptions, mapping, styles) {
       .attr("cx", d => xScale(xAccessor(d.reducedDimension)))
       .attr("cy", d => yScale(yAccessor(d.reducedDimension)))
       .attr("r", dotsRadius)
-      .attr("fill", d => d.groups ? colorScale(d.groups) : "#0365a8")
+      .attr("fill", d => d.category ? colorScale(d.category) : "#0365a8")
       .on('mouseover', mouseOver)
       .on('mouseout', mouseOut);
 
     return dots;
   }
+
+  function drawLinks() {
+    if (analysisMethod !== 'FDP') return;
+  
+    bounds.selectAll("line.link")
+      .data(fdpLinks)
+      .join("line")
+      .attr("class", "link")
+      .attr("x1", d => xScale(d.source.x))
+      .attr("y1", d => yScale(d.source.y))
+      .attr("x2", d => xScale(d.target.x))
+      .attr("y2", d => yScale(d.target.y))
+      .attr("stroke", "#999")
+      .attr("stroke-opacity", 0.5)
+      .attr("stroke-width", 1);
+  }  
+  
 }

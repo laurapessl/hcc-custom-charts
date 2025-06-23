@@ -1,5 +1,5 @@
 export const mapData = {
   dimensions: 'get',
-  groups: 'get',
+  category: 'get',
   labels: 'get',
 }
