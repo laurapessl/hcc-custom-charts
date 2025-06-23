@@ -316,7 +316,7 @@ const svg = d3Select(svgNode)
         .attr('xlink:href', `#${arcId}`)
         .attr('startOffset', '25%') //center text
         .attr('text-anchor', 'middle')
-        .style('font-size', '10px')
+        .style('font-size', '10')
         .text(`${month}`);
 
       if (isBottom) {
@@ -346,7 +346,7 @@ const svg = d3Select(svgNode)
       .attr('x', width / 2)
       .attr('y', margin.top)
       .attr('text-anchor', 'middle')
-      .attr('font-size', '16px')
+      .attr('font-size', '16')
       .attr('font-weight', 'bold')
       .text(title)
       .attr('dy', '1em');
@@ -398,7 +398,7 @@ const svg = d3Select(svgNode)
           .attr('y', 9)   // middle vertically of the box (18/2)
           .attr('dy', '0.35em') // vertical align middle
           .text(d => d)
-          .style('font-size', '12px')
+          .style('font-size', '12')
           .style('fill', '#000'); // or your preferred text color
       }
     }
