@@ -3,6 +3,7 @@
 Below are detailed descriptions about the charts included in the repository.
 
 # Paired Bar Chart
+
 A paired bar chart displays two related data sets side by side for direct comparison. It's commonly used to compare categories across two groups, such as male vs. female or before vs. after.
 
 <img src="images/pairedbarchart.svg" alt="Chart" width="300"/>
@@ -31,19 +32,19 @@ In RAWGraphs, choose the following data mapping:
 
 <img src="images/bulletchart-mapping.png" alt="Chart" width="600"/>
 
-The second recommended dataset is `happiness.csv`. This dataset shows the 
+The second recommended dataset is `happiness.csv`. This dataset shows the
 
 # Connected Scatter Plot
 
-
 # Pareto Chart
+
 A Pareto chart is a combination of a bar chart and a line graph. The line shows the cumulative percentage.
 
 <img src="images/pareto.svg" alt="Chart" width="300"/>
 
 ## Data
 
-The recommended dataset for this chart is `km.csv`. This dataset shows the average km/h per category (train, car etc.).
+The recommended dataset for this chart is `complaints.csv`. This dataset shows the number of customer complaints grouped by issue type.
 
 In RAWGraphs, choose the following data mapping:
 
@@ -66,7 +67,6 @@ In RAWGraphs, choose the following data mapping:
 <img src="images/similaritymap-mapping.png" alt="Chart" width="600"/>
 
 Feel free to swap the dimensions to the ones you are interested in. In the `Customize` section of RAWGraphs under `Dimensionality Reduction` you can choose one of three reduction methods which are PCA, UMAP and t-SNE.
-
 
 # Polar Area Chart
 
