@@ -98,8 +98,12 @@ export function render(
   // add background
   svg
     .append('rect')
-    .attr('width', showLegend ? width + legendWidth : width)
-    .attr('height', height)
+    //.attr('width', showLegend ? width + legendWidth : width)
+    //.attr('height', height)
+    .attr('width', null)
+    .attr('height', null)
+    .attr('font-family', 'Arial')
+    .attr('viewBox', `0 0 ${showLegend ? width + legendWidth : width} ${height}`)
     .attr('x', 0)
     .attr('y', 0)
     .attr('fill', background)

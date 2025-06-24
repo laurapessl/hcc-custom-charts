@@ -217,8 +217,10 @@ export function render(node, data, visualOptions, mapping, styles) {
 
   function createBounds() {
     svg.append('rect')
-      .attr('width', width)
-      .attr('height', height)
+      .attr('width', null)
+      .attr('height', null)
+      .attr('font-family', 'Arial')
+      .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('fill', background);
 
     if (titleSize) {

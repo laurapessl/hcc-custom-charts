@@ -61,6 +61,11 @@ export function render(
   } = calcProps()
 
   const svg = d3Select(node)
+  svg
+  .attr('width', null)
+  .attr('height', null)
+  .attr('font-family', 'Arial')
+  .attr('viewBox', `0 0 ${width} ${height}`)
   const bounds = createBounds()
   const { x1Scale, x2Scale, x1ScaleReverse, yScale } = createScales()
   const { x1Axis, x2Axis, yAxis } = createAxes()
@@ -255,9 +260,6 @@ export function render(
     return { labelX1, labelX2, labelY }
   }
 
-  console.log('ColorScale1:', visualOptions.colorScale1(0.5))
-  console.log('ColorScale2:', visualOptions.colorScale2(0.5))
-
   function createBars() {
     const bars1 = bounds
       .append('g')
@@ -269,8 +271,9 @@ export function render(
       .attr('y', (d) => yScale(yAccessor(d)))
       .attr('height', yScale.bandwidth())
       .attr('width', (d) => x1Scale(x1Accessor(d)))
+      .attr('fill', (d) => visualOptions.colorScale1(d.x1));
       //.attr('fill', "#3333ff")
-      .attr('fill', (d) => visualOptions.colorScale1(d.x1))
+      
 
     const bars2 = bounds
       .append('g')
@@ -282,9 +285,9 @@ export function render(
       .attr('y', (d) => yScale(yAccessor(d)))
       .attr('height', yScale.bandwidth())
       .attr('width', (d) => x2Scale(x2Accessor(d)))
+      .attr('fill', (d) => visualOptions.colorScale2(d.x2));
       //.attr('fill', "#ff5555")
-      .attr('fill', (d) => visualOptions.colorScale2(d.x2))
-
+      
     return { bars1, bars2 }
   }
 }
