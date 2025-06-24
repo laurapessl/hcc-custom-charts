@@ -19,6 +19,10 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
     rangeColors,
     measureColor,
     targetColor,
+    peformanceColorDefault,
+    perfomaceColorTargetMet,
+    perfomanceColorTargetNearTarget,
+    perfomaceColorBelowTarget,
     showPerformanceIndicators
   } = visualOptions
   
@@ -79,14 +83,14 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
       .attr('class', `bullet-chart-${i}`)
     
     d.ranges.forEach((range, idx) => {
-      const colorIndex = Math.min(idx, rangeColors.length - 1)
+      //const colorIndex = Math.min(idx, rangeColors.length - 1)
       chartGroup.append('rect')
         .attr('class', `range range-${idx}`)
         .attr('x', 0)
         .attr('y', 0)
         .attr('width', xScale(range))
         .attr('height', chartHeight)
-        .attr('fill', rangeColors[colorIndex])
+        .attr('fill', (d) => visualOptions.rangeColors(range))
         .attr('opacity', 0.5)
         .attr('stroke', '#fff')
         .attr('stroke-width', 0.5)
@@ -140,17 +144,17 @@ export function render(svgNode, data, visualOptions, mapping, originalData, styl
     if (showPerformanceIndicators && d.target > 0) {
       const performance = d.measure / d.target
       let performanceText = ''
-      let performanceColor = '#666'
+      let performanceColor = peformanceColorDefault
       
       if (performance >= 1) {
-        performanceText = '✓ Target Met'
-        performanceColor = '#28a745'
+        performanceText = 'Target Met'
+        performanceColor = perfomaceColorTargetMet
       } else if (performance >= 0.9) {
-        performanceText = '~ Near Target'
-        performanceColor = '#ffc107'
+        performanceText = 'Near Target'
+        performanceColor = perfomanceColorTargetNearTarget
       } else {
-        performanceText = '✗ Below Target'
-        performanceColor = '#dc3545'
+        performanceText = 'Below Target'
+        performanceColor = perfomaceColorBelowTarget
       }
       
       chartGroup.append('text')

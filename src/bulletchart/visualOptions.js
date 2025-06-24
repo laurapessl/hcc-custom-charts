@@ -71,8 +71,13 @@ export const visualOptions = {
   rangeColors: {
     type: 'colorScale',
     label: 'Range Colors',
-    default: ['#ffcccc', '#ffe6cc', '#ccffcc'],
-    group: 'chart'
+    dimension: 'ranges',
+    dimensionId: 'ranges',
+    default: {
+      scaleType: 'ordinal',
+      interpolator: 'interpolateSpectral',
+    },
+    group: 'chart',
   },
   measureColor: {
     type: 'color',
@@ -86,10 +91,34 @@ export const visualOptions = {
     default: '#2c3e50',
     group: 'chart'
   },
+  peformanceColorDefault: {
+    type: 'color',
+    label: 'Deault Performance Color',
+    default: '#666',
+    group: 'chart'
+  },
+  perfomaceColorTargetMet: {
+    type: 'color',
+    label: 'Performance Color Target Met',
+    default: '#28a745',
+    group: 'chart'
+  },
+  perfomanceColorTargetNearTarget: {
+    type: 'color',
+    label: 'Performance Color Near Target',
+    default: '#ffc107',
+    group: 'chart'
+  },
+  perfomaceColorBelowTarget: {
+    type: 'color',
+    label: 'Performance Color Below Target',
+    default: '#dc3545',
+    group: 'chart'
+  },
   showPerformanceIndicators: {
     type: 'boolean',
     label: 'Show Performance Indicators',
     default: true,
     group: 'chart'
-  }
+  },
 }
