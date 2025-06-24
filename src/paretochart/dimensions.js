@@ -1,13 +1,13 @@
 export const dimensions = [
   {
     id: 'x',
-    name: 'X axis',
+    name: 'Categories',
     validTypes: ['string'],
     required: true,
   },
   {
     id: 'y',
-    name: 'Y axis',
+    name: 'Values',
     validTypes: ['number'],
     required: true,
   },

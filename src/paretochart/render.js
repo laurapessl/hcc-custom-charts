@@ -39,6 +39,8 @@ export function render(
     d => d.x
   )
 
+
+
   const sorters = {
     totalDescending: (a, b) => d3.descending(a[1], b[1]),
     totalAscending: (a, b) => d3.ascending(a[1], b[1]),
@@ -62,6 +64,10 @@ export function render(
   })
 
   const svg = d3.select(node)
+  .attr('width', null)
+  .attr('height', null)
+  .attr('viewBox', `0 0 ${width} ${height}`)
+  .attr('preserveAspectRatio', 'xMidYMid meet');
   svg.selectAll('*').remove()
 
   svg
