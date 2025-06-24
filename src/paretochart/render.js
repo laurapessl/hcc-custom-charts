@@ -1,4 +1,9 @@
-import * as d3 from 'd3'
+import { select as d3Select } from 'd3-selection'
+import { axisLeft as d3AxisLeft, axisRight as d3AxisRight, axisBottom as d3AxisBottom } from 'd3-axis'
+import { scaleBand as d3ScaleBand, scaleLinear as d3ScaleLinear } from 'd3-scale'
+import { line as d3Line } from 'd3-shape'
+import { rollups as d3Rollups, sum as d3Sum, descending as d3Descending, ascending as d3Ascending, max as d3Max } from 'd3-array'
+import { format as d3Format } from 'd3-format'
 import '../d3-styles.js'
 
 export function render(
@@ -33,25 +38,23 @@ export function render(
   } = visualOptions
 
   // Aggregate and sort data
-  let aggregatedData = d3.rollups(
+  let aggregatedData = d3Rollups(
     data,
-    v => d3.sum(v, d => d.y),
+    v => d3Sum(v, d => d.y),
     d => d.x
   )
 
-
-
   const sorters = {
-    totalDescending: (a, b) => d3.descending(a[1], b[1]),
-    totalAscending: (a, b) => d3.ascending(a[1], b[1]),
-    name: (a, b) => d3.ascending(a[0], b[0]),
+    totalDescending: (a, b) => d3Descending(a[1], b[1]),
+    totalAscending: (a, b) => d3Ascending(a[1], b[1]),
+    name: (a, b) => d3Ascending(a[0], b[0]),
     original: () => 0,
   }
 
   aggregatedData.sort(sorters[sortBarsBy] || sorters.totalDescending)
 
   // Compute cumulative percentages
-  const total = d3.sum(aggregatedData, d => d[1])
+  const total = d3Sum(aggregatedData, d => d[1])
   let cumulativeValues = 0
   const paretoData = aggregatedData.map(([category, value]) => {
     cumulativeValues += value
@@ -63,11 +66,11 @@ export function render(
     }
   })
 
-  const svg = d3.select(node)
-  .attr('width', null)
-  .attr('height', null)
-  .attr('viewBox', `0 0 ${width} ${height}`)
-  .attr('preserveAspectRatio', 'xMidYMid meet');
+  const svg = d3Select(node)
+    .attr('width', null)
+    .attr('height', null)
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
   svg.selectAll('*').remove()
 
   svg
@@ -84,19 +87,16 @@ export function render(
     .attr('transform', `translate(${marginLeft},${marginTop})`)
 
   // Scales
-  const xScale = d3
-    .scaleBand()
+  const xScale = d3ScaleBand()
     .domain(paretoData.map(d => d.category))
     .range([0, boundWidth])
     .padding(padding)
 
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, d3.max(paretoData, d => d.cumulativeSum)])
+  const yScale = d3ScaleLinear()
+    .domain([0, d3Max(paretoData, d => d.cumulativeSum)])
     .range([boundHeight, 0])
 
-  const yScaleRight = d3
-    .scaleLinear()
+  const yScaleRight = d3ScaleLinear()
     .domain([0, 1])
     .range([boundHeight, 0])
 
@@ -124,11 +124,11 @@ export function render(
       .text(axisLeftLabel)
   }
 
-  const yAxisLeft = d3.axisLeft(yScale).ticks(5).tickFormat((d3.format('~s')))
+  const yAxisLeft = d3AxisLeft(yScale).ticks(5).tickFormat(d3Format('~s'))
   bounds.append('g').call(yAxisLeft)
 
   // Bottom x axis (categories)
-  const xAxis = d3.axisBottom(xScale)
+  const xAxis = d3AxisBottom(xScale)
   bounds
     .append('g')
     .attr('transform', `translate(0,${boundHeight})`)
@@ -161,10 +161,9 @@ export function render(
       .text(axisRightLabel)
   }
 
-  const yAxisRight = d3
-    .axisRight(yScaleRight)
+  const yAxisRight = d3AxisRight(yScaleRight)
     .ticks(10)
-    .tickFormat(d3.format('.0%'))
+    .tickFormat(d3Format('.0%'))
 
   bounds
     .append('g')
@@ -173,8 +172,7 @@ export function render(
 
   // Cumulative line
   if (showCumulativeLine) {
-    const lineGenerator = d3
-      .line()
+    const lineGenerator = d3Line()
       .x(d => xScale(d.category) + xScale.bandwidth() / 2)
       .y(d => yScaleRight(d.cumulative))
 

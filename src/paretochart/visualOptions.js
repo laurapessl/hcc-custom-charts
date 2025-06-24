@@ -79,7 +79,7 @@ export const visualOptions = {
   marginBottom: {
     type: 'number',
     label: 'Margin (bottom)',
-    default: 80,
+    default: 100,
     group: 'artboard',
   },
 

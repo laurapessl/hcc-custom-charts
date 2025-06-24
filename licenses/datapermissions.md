@@ -1,6 +1,7 @@
 # Datasets & Permissions
 
 ## Connected Scatterplot - Driving Data
+
 - Driving.csv
 
 https://observablehq.com/@d3/connected-scatterplot
@@ -29,9 +30,22 @@ https://blog.datawrapper.de/connected-scatterplots/
 https://population.un.org/wpp/Download/Standard/MostUsed/
 
 Copyright © 2022 by United Nations, made available under a Creative Commons license CC BY 3.0 IGO: http://creativecommons.org/licenses/by/3.0/igo/
-Suggested citation: United Nations, Department of Economic and Social Affairs, Population Division (2022). World Population Prospects 2022, Online Edition. 
+Suggested citation: United Nations, Department of Economic and Social Affairs, Population Division (2022). World Population Prospects 2022, Online Edition.
+
+## Pareto Chart - Complaints Dataset
+
+- complaints.csv
+
+This sample dataset contains information on various types of customer complaints and the frequency of their occurrence. It is ideal for creating a Pareto chart to analyze which complaint types are most common and contribute the most to the overall volume. This can help prioritize areas for improvement. The dataset has been created by Bastian Kandlbauer.
+
+## Pareto Chart - KM/H
+
+- km.csv
+
+This sample dataset provides the average speeds of various types of transportation. It's useful for creating a Pareto chart to help in analyzing efficiency and prioritizing transport methods based on speed. The dataset has been created by Bastian Kandlbauer.
 
 ## Similarity Map - Predict Students' Dropout and Academic Success
+
 - PredictStudentsDropoutAcademicSuccess.csv
 
 https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success
@@ -61,7 +75,7 @@ Fisher, R. (1936). Iris [Dataset]. UCI Machine Learning Repository. https://doi.
 
 ## ???? - Cars 1993 Dataset
 
-- 
+-
 
 ## Polar Area Chart - Florence Nightingale's Data on Deaths
 
@@ -73,4 +87,4 @@ Kaggle Owner: Johar M. Ashfaque
 
 There is no licence information.
 
-## Polar Area Chart - 
+## Polar Area Chart -
