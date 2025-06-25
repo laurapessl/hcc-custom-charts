@@ -62,7 +62,8 @@ A polar area chart displays data similar to a pie chart where each segment repre
 The recommended dataset for this chart is `nightingale.csv`. This is Florence Nightingale's original dataset, that shows the causes of mortality in the army in the east from 1854 to 1855.
 
 In RAWGraphs, choose the following data mapping:
-<img src="images/polar-area-chart-mapping.png" alt="Chart" width="300"/>
+
+<img src="images/polar-area-chart-mapping.png" alt="Chart" width="600"/>
 
 # Similarity Map
 
