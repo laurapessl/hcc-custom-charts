@@ -52,6 +52,18 @@ In RAWGraphs, choose the following data mapping:
 
 # Polar Area Chart
 
+A polar area chart displays data similar to a pie chart where each segment represents a category, and the radius of each segment corresponds to its value.
+
+<img src="images/polar-area-chart.svg" alt="Chart" width="300"/>
+
+
+## Data
+
+The recommended dataset for this chart is `nightingale.csv`. This is Florence Nightingale's original dataset, that shows the causes of mortality in the army in the east from 1854 to 1855.
+
+In RAWGraphs, choose the following data mapping:
+<img src="images/polar-area-chart-mapping.png" alt="Chart" width="300"/>
+
 # Similarity Map
 
 A similarity map is a visual representation that places similar items closer together and dissimilar ones farther apart. It helps to reveal patterns, clusters, or relationships in complex datasets, often using methods like PCA or t-SNE.
