@@ -30,7 +30,7 @@ The first recommended dataset for this chart is `revenues.csv`. This dataset com
 
 In RAWGraphs, choose the following data mapping:
 
-<img src="images/bulletchart-mapping.png" alt="Chart" width="600"/>
+<img src="images/bullet-chart-mapping.png" alt="Chart" width="600"/>
 
 The second recommended dataset is `happiness.csv`. This dataset shows the
 
