@@ -46,6 +46,11 @@ export function render(node, data, visualOptions, mapping, styles) {
   const yDimension = reducedDimensions.map(point => point[1]);
 
   const svg = select(node);
+  svg
+    .attr('width', null)
+    .attr('height', null)
+    .attr('font-family', 'Arial')
+    .attr('viewBox', `0 0 ${width} ${height}`)
   const bounds = createBounds();
   const { xScale, yScale } = createScales();
   const { xAxis, yAxis } = createAxes();
@@ -217,10 +222,6 @@ export function render(node, data, visualOptions, mapping, styles) {
 
   function createBounds() {
     svg.append('rect')
-      .attr('width', null)
-      .attr('height', null)
-      .attr('font-family', 'Arial')
-      .attr('viewBox', `0 0 ${width} ${height}`)
       .attr('fill', background);
 
     if (titleSize) {
