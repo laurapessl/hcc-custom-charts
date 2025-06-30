@@ -35,6 +35,15 @@ In RAWGraphs, choose the following data mapping:
 The second recommended dataset is `happiness.csv`. This dataset shows the
 
 # Connected Scatter Plot
+A connected scatter plot shows the evolution of a value over time with a connected line. 
+
+## Data
+
+The recommended dataset for this chart is `cereal.csv`. This dataset shows the number of customer complaints grouped by issue type.
+
+In RAWGraphs, choose the following data mapping:
+
+# Todo
 
 # Pareto Chart
 

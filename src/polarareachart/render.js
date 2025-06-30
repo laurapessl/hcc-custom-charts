@@ -109,11 +109,10 @@ const svg = d3Select(svgNode)
     .attr('transform', `translate(${margin.left + chartWidth / 2},${margin.top + chartHeight / 2})`)
     .attr('id', 'viz');
 
-  // Group data by month and year
+  // Group data by month
   const dataByMonthYear = d3Group(data, d => {
-    const year = d.years;
     const month = d.months;
-    return `${month.toString().padStart(2, '0')} ${year}`;
+    return `${month.toString()}`;
   });
   
   const months = Array.from(dataByMonthYear.keys());
@@ -288,7 +287,7 @@ const svg = d3Select(svgNode)
       });
     }
 
-    // Add label per slice (month + year)
+    //Add label per slice (month)
     if(showLabels) {
       const arcId = `arc-label-${month.replace(/\s/g, '-')}`;
       const labelRadius = slice.outerR * 1.05;
@@ -340,7 +339,7 @@ const svg = d3Select(svgNode)
 
 
 
-  // Title
+  //Title
   if (title) {
     svg.append('text')
       .attr('x', width / 2)
@@ -352,7 +351,7 @@ const svg = d3Select(svgNode)
       .attr('dy', '1em');
   }
 
-  // Legend
+  //Legend
 
     if (showLegend) {
       const legendLayer = d3Select(svgNode)
@@ -376,8 +375,8 @@ const svg = d3Select(svgNode)
 
         console.log('categoryValues:', categoryValues);
     
-        const legendItemHeight = 20; // height for each legend item
-        const legendItemSpacing = 5; // spacing between items
+        const legendItemHeight = 20;
+        const legendItemSpacing = 5;
     
         const legendItems = legendLayer.selectAll('g.legend-item')
           .data(categoryValues)
@@ -386,20 +385,18 @@ const svg = d3Select(svgNode)
           .attr('class', 'legend-item')
           .attr('transform', (d, i) => `translate(0, ${i * (legendItemHeight + legendItemSpacing)})`);
     
-        // Color boxes
         legendItems.append('rect')
           .attr('width', 18)
           .attr('height', 18)
           .attr('fill', d => {console.log(d); return colorScale(" " + d)} );
     
-        // Labels next to color boxes
         legendItems.append('text')
-          .attr('x', 24)  // some space right to the box
-          .attr('y', 9)   // middle vertically of the box (18/2)
-          .attr('dy', '0.35em') // vertical align middle
+          .attr('x', 24)
+          .attr('y', 9)
+          .attr('dy', '0.35em')
           .text(d => d)
           .style('font-size', '12')
-          .style('fill', '#000'); // or your preferred text color
+          .style('fill', '#000');
       }
     }
     

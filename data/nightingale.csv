@@ -1,33 +1,33 @@
-﻿Month, Year, Value, Category
-April, 1854, 5, Other
-April, 1854, 1, Zymotic
-May, 1854, 9, Other
-May, 1854, 12, Zymotic
-June, 1854, 11, Zymotic
-June, 1854, 6, Other
-July, 1854, 359, Zymotic
-July, 1854, 23, Other
-August, 1854, 828, Zymotic
-August, 1854, 30, Other
-August, 1854, 1, Wounds
-September, 1854, 788, Zymotic
-September, 1854, 70, Other
-September, 1854, 81, Wounds
-October, 1854, 503, Zymotic
-October, 1854, 128, Other
-October, 1854, 132, Wounds
-November, 1854, 844, Zymotic
-November, 1854, 106, Other
-November, 1854, 287, Wounds
-December, 1854, 1725, Zymotic
-December, 1854, 131, Other
-December, 1854, 114, Wounds
-January, 1854, 2761, Zymotic
-January, 1854, 83, Wounds
-January, 1854, 324, Other
-February, 1855, 2120, Zymotic
-February, 1855, 42, Wounds
-February, 1855, 361, Other
-March, 1855, 1205, Zymotic
-March, 1855, 32, Wounds
-March, 1855, 172, Other
+﻿Month, Value, Category
+1854-04, 5, Other
+1854-04, 1, Zymotic
+1854-05, 9, Other
+1854-05, 12, Zymotic
+1854-06, 11, Zymotic
+1854-06, 6, Other
+1854-07, 359, Zymotic
+1854-07, 23, Other
+1854-08, 828, Zymotic
+1854-08, 30, Other
+1854-08, 1, Wounds
+1854-09, 788, Zymotic
+1854-09, 70, Other
+1854-09, 81, Wounds
+1854-10, 503, Zymotic
+1854-10, 128, Other
+1854-10, 132, Wounds
+1854-11, 844, Zymotic
+1854-11, 106, Other
+1854-11, 287, Wounds
+1854-12, 1725, Zymotic
+1854-12, 131, Other
+1854-12, 114, Wounds
+1854-01, 2761, Zymotic
+1854-01, 83, Wounds
+1854-01, 324, Other
+1855-02, 2120, Zymotic
+1855-02, 42, Wounds
+1855-02, 361, Other
+1855-03, 1205, Zymotic
+1855-03, 32, Wounds
+1855-03, 172, Other

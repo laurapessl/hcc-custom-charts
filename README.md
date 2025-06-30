@@ -151,35 +151,6 @@ nvm install 22
 nvm use 22
 ```
 
-## Problems with `yarn sandbox`
-
-Commands that may fix some of the Node.js errors when trying to run .
-
-```
-yarn add ml-pca umap-js
-```
-
-## Problems with `yarn build`
-
-react-scripts: not found
-
-```
-yarn install
-```
-
-### Changes to run Similarity Map in Sandbox
-
-- added `src/similaritymap`.
-- added `src/styles/base.raw.css`.
-- added `src/index.html`:
-  - export { default as similaritymap } from './similaritymap'
-- added `src/tsne.js`.
-  - (for later <b>UMAP</b> und <b>PCA</b>)
-- added `datasets/fake-multiset.tsv`.
-- added `example/configurations/similaritymap-test.js`.
-- added `example/configurations/similaritymap-test.js`:
-  - import chart from `customcharts/similaritymap`
-
 ### What is `.rawgraphs`
 
 JSON-based format that allows users to save and later reload their projects.
@@ -205,8 +176,6 @@ If you'd like to contribute, follow the RAWGraphs [custom template guide](https:
 
 Supervisor: [@kandrews99](https://github.com/kandrews99).
 
-Original code and template for Similarity Map by [@blindguardian50](https://github.com/blindguardian50) [@steve1711](https://github.com/steve1711), [@TheAlmightySpaceWarrior](https://github.com/TheAlmightySpaceWarrior), [@wizardry8](https://github.com/wizardry8).
-
-Final implementation of Similarity Map and original code for Connected Scatterplot by [@solidth](https://github.com/solidth), [@hezojez](https://github.com/hezojez) and [@Ramadan877](https://github.com/Ramadan877).
+Based on GitHub Repository [https://github.com/solidth/RAWGraphs-Custom-Charts](https://github.com/solidth/RAWGraphs-Custom-Charts) by [@solidth](https://github.com/solidth), [@hezojez](https://github.com/hezojez) and [@Ramadan877](https://github.com/Ramadan877).
 
 Extensions added to Connected Scatterplot and Similarity Map as well as implementation of Bullet Chart, Polar Area Chart and Pareto Chart by [@bkandlbauer](https://github.com/bkandlbauer), [@theplanetarpelican](https://github.com/theplanetarpelican) and [@laurapessl](https://github.com/laurapessl).

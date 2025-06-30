@@ -1,9 +1,8 @@
 import { select as d3Select } from 'd3-selection';
 import { extent, descending, ascending, sum, rollups } from 'd3-array';
 import { axisLeft, axisBottom } from 'd3-axis';
-import { scaleLinear, scaleBand } from 'd3-scale';
-import { scaleSequential } from 'd3-scale'
-import { interpolateBlues, interpolateReds } from 'd3-scale-chromatic'
+import { scaleLinear, scaleBand, scaleSequential } from 'd3-scale';
+import { interpolateReds, interpolateBlues } from 'd3-scale-chromatic';
 import '../d3-styles.js'
 
 export function render(
@@ -41,8 +40,8 @@ export function render(
     spaceCommonAxis,
     sortBarsBy,
     padding,
-    colorScale1,
-    colorScale2,
+    colorScaleBlue,
+    colorScaleRed,
   } = visualOptions
 
   const {
@@ -53,8 +52,8 @@ export function render(
     boundHeight,
     boundLeft,
     boundTop,
-    x1Accessor,
-    x2Accessor,
+    leftAccessor,
+    rightAccessor,
     yAccessor,
     barsSortings,
     barsDomain,
@@ -67,9 +66,9 @@ export function render(
   .attr('font-family', 'Arial')
   .attr('viewBox', `0 0 ${width} ${height}`)
   const bounds = createBounds()
-  const { x1Scale, x2Scale, x1ScaleReverse, yScale } = createScales()
-  const { x1Axis, x2Axis, yAxis } = createAxes()
-  const { labelX1, labelX2 } = createAxisLabels()
+  const { leftScale, rightScale, leftScaleReverse, yScale } = createScales()
+  const { leftAxis, rightAxis, yAxis } = createAxes()
+  const { labelLeft, labelRight } = createAxisLabels()
   const { bars1, bars2 } = createBars()
 
   function calcProps() {
@@ -87,8 +86,8 @@ export function render(
       boundHeight -= titleSize
     }
 
-    const x1Accessor = (d) => d.x1
-    const x2Accessor = (d) => d.x2
+    const leftAccessor = (d) => d.left
+    const rightAccessor = (d) => d.right
     const yAccessor = (d) => d.y
 
     const barsSortings = {
@@ -115,8 +114,8 @@ export function render(
       boundHeight,
       boundLeft,
       boundTop,
-      x1Accessor,
-      x2Accessor,
+      leftAccessor,
+      rightAccessor,
       yAccessor,
       barsSortings,
       barsDomain,
@@ -139,21 +138,21 @@ export function render(
   }
 
   function createScales() {
-    const x1Scale =
+    const leftScale =
       scaleLinear()
-      .domain(extent(data, x1Accessor))
+      .domain(extent(data, leftAccessor))
       .range([0, boundWidthOneChart / 2])
       .nice()
 
-    const x1ScaleReverse =
+    const leftScaleReverse =
       scaleLinear()
-      .domain(extent(data, x1Accessor))
+      .domain(extent(data, leftAccessor))
       .range([boundWidth, (boundWidth + spaceCommonAxis) / 2])
       .nice()
 
-    const x2Scale =
+    const rightScale =
       scaleLinear()
-      .domain(extent(data, x2Accessor))
+      .domain(extent(data, rightAccessor))
       .range([0, boundWidthOneChart / 2])
       .nice()
 
@@ -163,7 +162,7 @@ export function render(
       .range([0, boundHeight])
       .padding(padding / (boundHeight / barsDomain.length))
 
-    return { x1Scale, x2Scale, x1ScaleReverse, yScale }
+    return { leftScale, rightScale, leftScaleReverse, yScale }
   }
 
   function createAxes() {
@@ -182,66 +181,66 @@ export function render(
       .attr('x', '0')
       .attr('text-anchor', 'middle')
 
-    const x1AxisGenerator = axisBottom().scale(x1ScaleReverse)
-    const x1Axis = bounds
+    const leftAxisGenerator = axisBottom().scale(leftScaleReverse)
+    const leftAxis = bounds
       .append('g')
-      .call(x1AxisGenerator)
+      .call(leftAxisGenerator)
       .attr(
         'transform',
         `translate(${-(boundWidth + spaceCommonAxis) / 2}, ${boundHeight})`
       )
 
-    x1Axis
+    leftAxis
       .selectAll('text')
       .attr('text-anchor', labelLeftAlignment)
       .attr('transform', `rotate(${labelLeftRotation})`)
 
-    const x2AxisGenerator = axisBottom().scale(x2Scale)
-    const x2Axis = bounds
+    const rightAxisGenerator = axisBottom().scale(rightScale)
+    const rightAxis = bounds
       .append('g')
-      .call(x2AxisGenerator)
+      .call(rightAxisGenerator)
       .attr(
         'transform',
         `translate(${(boundWidth + spaceCommonAxis) / 2}, ${boundHeight})`
       )
 
-    x2Axis
+    rightAxis
       .selectAll('text')
       .attr('text-anchor', labelRightAlignment)
       .attr('transform', `rotate(${labelRightRotation})`)
 
-    return { x1Axis, x2Axis, yAxis }
+    return { leftAxis, rightAxis, yAxis }
   }
 
   function createAxisLabels() {
-    let labelX1 = null
-    let labelX2 = null
+    let labelLeft = null
+    let labelRight = null
     let labelY = null
     if (axisLeftLabelVisible) {
-      const { x: x1 } = x1Axis._groups[0][0].getBBox()
-      labelX1 = x1Axis
+      const { x: left } = leftAxis._groups[0][0].getBBox()
+      labelLeft = leftAxis
         .append('text')
-        .text(axisLeftLabel ? axisLeftLabel : mapping.x1.value)
-        .attr('dx', x1)
+        .text(axisLeftLabel ? axisLeftLabel : mapping.left.value)
+        .attr('dx', left)
         .attr('class', 'axisLabel') //instead of .styles(styles.axisLabel)
 
-      labelX1.attr(
+      labelLeft.attr(
         'transform',
-        `translate(${labelX1._groups[0][0].getBBox().width / 2}, ${-5})`
+        `translate(${labelLeft._groups[0][0].getBBox().width / 2}, ${-5})`
       )
     }
 
     if (axisRightLabelVisible) {
-      const { x: x2, width: widthX2 } = x2Axis._groups[0][0].getBBox()
-      labelX2 = x2Axis
+      const { x: right, width: widthRight } = rightAxis._groups[0][0].getBBox()
+      labelRight = rightAxis
         .append('text')
-        .text(axisRightLabel ? axisRightLabel : mapping.x2.value)
-        .attr('dx', x2 + widthX2)
+        .text(axisRightLabel ? axisRightLabel : mapping.right.value)
+        .attr('dx', right + widthRight)
         .attr('class', 'axisLabel') //instead of .styles(styles.axisLabel)
 
-      labelX2.attr(
+      labelRight.attr(
         'transform',
-        `translate(${-labelX2._groups[0][0].getBBox().width / 2}, -5)`
+        `translate(${-labelRight._groups[0][0].getBBox().width / 2}, -5)`
       )
     }
 
@@ -257,8 +256,9 @@ export function render(
       )
     }
 
-    return { labelX1, labelX2, labelY }
+    return { labelLeft, labelRight, labelY }
   }
+
 
   function createBars() {
     const bars1 = bounds
@@ -267,11 +267,11 @@ export function render(
       .selectAll('rect')
       .data(data)
       .join('rect')
-      .attr('x', (d) => boundWidthOneChart / 2 - x1Scale(x1Accessor(d)))
+      .attr('x', (d) => boundWidthOneChart / 2 - leftScale(leftAccessor(d)))
       .attr('y', (d) => yScale(yAccessor(d)))
       .attr('height', yScale.bandwidth())
-      .attr('width', (d) => x1Scale(x1Accessor(d)))
-      .attr('fill', (d) => visualOptions.colorScale1(d.x1));
+      .attr('width', (d) => leftScale(leftAccessor(d)))
+      .attr('fill', (d) => visualOptions.colorScaleBlue(leftAccessor(d)));
       //.attr('fill', "#3333ff")
       
 
@@ -284,8 +284,8 @@ export function render(
       .attr('x', (boundWidth + spaceCommonAxis) / 2)
       .attr('y', (d) => yScale(yAccessor(d)))
       .attr('height', yScale.bandwidth())
-      .attr('width', (d) => x2Scale(x2Accessor(d)))
-      .attr('fill', (d) => visualOptions.colorScale2(d.x2));
+      .attr('width', (d) => rightScale(rightAccessor(d)))
+      .attr('fill', (d) => visualOptions.colorScaleRed(rightAccessor(d)));
       //.attr('fill', "#ff5555")
       
     return { bars1, bars2 }

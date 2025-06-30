@@ -88,6 +88,14 @@ export const visualOptions = {
     group: 'chart',
   },
 
+  showLabels: {
+    type: 'boolean',
+    label: 'Show labels',
+    default: true,
+    group: 'labels',
+  },
+
+  //COLOR
   colorScale: {
     type: 'colorScale',
     label: 'Color scale',
@@ -96,13 +104,6 @@ export const visualOptions = {
       scaleType: 'ordinal',
       interpolator: 'interpolateSpectral',
     },
-    group: 'category',
-  },
-  
-  showLabels: {
-    type: 'boolean',
-    label: 'Show labels',
-    default: true,
-    group: 'labels',
+    group: 'color',
   }
 }

@@ -1,1 +1,1 @@
-export { default } from './barchartpaired' // update the name of the initialization file
+export { default } from './barchartpaired'

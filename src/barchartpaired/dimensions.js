@@ -1,6 +1,6 @@
 export const dimensions = [
   {
-    id: 'x1',
+    id: 'left',
     name: 'Left Side',
     validTypes: ['number'],
     required: true,
@@ -13,7 +13,7 @@ export const dimensions = [
     required: true,
   },
   {
-    id: 'x2',
+    id: 'right',
     name: 'Right Side',
     validTypes: ['number'],
     required: true,

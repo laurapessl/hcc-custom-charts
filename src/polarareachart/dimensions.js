@@ -7,14 +7,6 @@ export const dimensions = [
     multiple: false,
   },
   {
-    id: 'years',
-    name: 'years',
-    validTypes: ['number'],
-    aggregation: false,
-    required: true,
-    multiple: false,
-  },
-  {
     id: 'value',
     name: 'value',
     validTypes: ['number'],

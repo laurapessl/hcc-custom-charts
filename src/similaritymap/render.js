@@ -31,6 +31,8 @@ export function render(node, data, visualOptions, mapping, styles) {
     analysisMethod // Add analysisMethod to choose between TSNE, PCA, and UMAP
   } = visualOptions;
 
+  const vectorAccessor = (d) => d.dimensions;
+
   const {
     titleSize,
     boundWidth,
@@ -54,8 +56,11 @@ export function render(node, data, visualOptions, mapping, styles) {
   const bounds = createBounds();
   const { xScale, yScale } = createScales();
   const { xAxis, yAxis } = createAxes();
-  drawLinks();
   const { dots } = drawScatterPoints();
+
+  
+
+  console.log("Here");
 
   function calcProps() {
     const minTitleHeight = 300;
@@ -73,63 +78,20 @@ export function render(node, data, visualOptions, mapping, styles) {
     const xAccessor = d => d[0];
     const yAccessor = d => d[1];
 
-    const { reducedDimensions, reducedDimensionsClassified } = calcReducedDimensions();
+    const { reducedDimensions, reducedDimensionsClassified } = calcReducedDimensions(boundWidth, boundHeight);
 
     return { minTitleHeight, titleSize, boundWidth, boundHeight, boundLeft, boundTop, xAccessor, yAccessor, reducedDimensions, reducedDimensionsClassified };
   }
 
-
-  // function calcReducedDimensions() {
-  //   let reducedDimensions, reducedDimensionsClassified;
-  //   if (analysisMethod === 'PCA') {
-  //     const pca = new PCAAnalysis();
-  //     reducedDimensions = pca.fit(data.map(row => row.dimensions));
-  //   } else if (analysisMethod === 'UMAP') {
-  //     const umap = new UMAPAnalysis();
-  //     reducedDimensions = umap.fit(data.map(row => row.dimensions));
-  //   } else { // default to TSNE
-  //     const opt = { dim: 2, epsilon, perplexity };
-  //     var tsne = allTSNEE(opt);
-  //     const tsneData = data.map(row => row.dimensions);
-
-  //     tsne.initDataRaw(tsneData);
-
-  //     for (var k = 0; k < 500; k++) {
-  //       tsne.step(); // every time you call this, solution gets better
-  //     }
-
-  //     reducedDimensions = tsne.getSolution(); // Y is an array of 2-D points that you can plot
-  //   }
-
-  //   reducedDimensionsClassified = reducedDimensions.map((e, i) => {
-  //     let category = undefined;
-  //     let label = undefined;
-  //     if (data[i] && data[i].category) {
-  //       category = data[i].category;
-  //     }
-  //     if (data[i] && data[i].labels) {
-  //       label = data[i].labels;
-  //     }
-  //     return { reducedDimension: e, category, label };
-  //   });
-
-  //   return { reducedDimensions, reducedDimensionsClassified };
-  // }
-
-  function computeLinks(data) {
-    //k-nearest neighbors?? how to connect data?
-    const links = [];
-    const k = 5;
-    for (let i = 0; i < data.length; i++) {
-      for (let j = i + 1; j < i + k + 1 && j < data.length; j++) {
-        links.push({ source: i, target: j });
-      }
-    }
-    return links;
-  }  
-
+  function cosineSimilarity(vecA, vecB) {
+    const dot = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0);
+    const magA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
+    const magB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
+    return dot / (magA * magB);
+  }
+  
   // Change TSNE initialization to be based on PCA" :
-  function calcReducedDimensions() {
+  function calcReducedDimensions(bound_width, bound_height) {
     let reducedDimensions, reducedDimensionsClassified;
     const dimensionsData = data.map(row => row.dimensions);
   
@@ -140,54 +102,26 @@ export function render(node, data, visualOptions, mapping, styles) {
       const umap = new UMAPAnalysis();
       reducedDimensions = umap.fit(dimensionsData);
     } else if (analysisMethod === 'FDP') {
-      const dataNodes = data.map((d, i) => ({
-        id: i,
-        type: 'data',
-        ...d
-      }));
-    
-      const offset = dataNodes.length;
-      //create a "root" node for the category
-      const uniqueCategories = [...new Set(data.map(d => d.category))];
-      const categoryNodes = uniqueCategories.map((category, i) => ({
-        id: offset + i,
-        type: 'category',
-        category
-      }));
-    
-      const nodes = [...dataNodes, ...categoryNodes];
-    
-      const categoryIdMap = new Map();
-      uniqueCategories.forEach((category, i) => {
-        categoryIdMap.set(category, data.length + i);
-      });
-    
-      const links = data.map((d, i) => ({
-        source: i,
-        target: categoryIdMap.get(d.category)
-      }));
-    
-      const result = runForceDirectedLayout(nodes, links, width, height);
+      const nodes = data.map((d, i) => ({ id: i, data: d }));
+      const links = [];
 
-      const positionedNodes = nodes.map((node, i) => ({
-        ...node,
-        x: result[i].x,
-        y: result[i].y
-      }));
 
-      fdpLinks = links;
-      fdpNodes = positionedNodes;
-    
-      data = nodes;
-      reducedDimensions = result.slice(0, data.length).map(d => [d.x, d.y]);
-     
-      reducedDimensionsClassified = reducedDimensions.map((coords, i) => {
-        const category = data[i]?.category;
-        const label = data[i]?.label || data[i]?.labels;
-        return { reducedDimension: coords, category, label };
-      });
-    
-      return { reducedDimensions, reducedDimensionsClassified };    
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const sim = cosineSimilarity(vectorAccessor(data[i]), vectorAccessor(data[j]));
+          if (sim > 0.8) {
+            links.push({ source: i, target: j, similarity: sim });
+          }
+        }
+      }
+
+      console.log("Length links = ", links.length);
+
+      runForceDirectedLayout(nodes, links, { width: bound_width, height: bound_height });
+
+      reducedDimensions = nodes.map(n => [n.x, n.y]);
+
+       
     } else { // default to TSNE
       const pca = new PCAAnalysis();
       const pcaResult = pca.fit(dimensionsData); // Perform PCA first
@@ -309,22 +243,6 @@ export function render(node, data, visualOptions, mapping, styles) {
       .on('mouseout', mouseOut);
 
     return dots;
-  }
-
-  function drawLinks() {
-    if (analysisMethod !== 'FDP') return;
-  
-    bounds.selectAll("line.link")
-      .data(fdpLinks)
-      .join("line")
-      .attr("class", "link")
-      .attr("x1", d => xScale(d.source.x))
-      .attr("y1", d => yScale(d.source.y))
-      .attr("x2", d => xScale(d.target.x))
-      .attr("y2", d => yScale(d.target.y))
-      .attr("stroke", "#999")
-      .attr("stroke-opacity", 0.5)
-      .attr("stroke-width", 1);
-  }  
+  } 
   
 }

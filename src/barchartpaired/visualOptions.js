@@ -1,5 +1,61 @@
 export const visualOptions = {
-  //axis
+  //ARTBOARD (automatically added: width, height, background)
+  marginTop: {
+    type: 'number',
+    label: 'Margin (top)',
+    default: 50,
+    group: 'artboard',
+  },
+
+  marginRight: {
+    type: 'number',
+    label: 'Margin (right)',
+    default: 50,
+    group: 'artboard',
+  },
+
+  marginBottom: {
+    type: 'number',
+    label: 'Margin (bottom)',
+    default: 50,
+    group: 'artboard',
+  },
+
+  marginLeft: {
+    type: 'number',
+    label: 'Margin (left)',
+    default: 50,
+    group: 'artboard',
+  },
+
+  //CHART
+  spaceCommonAxis: {
+    type: 'number',
+    label: 'Space for common axis',
+    default: 100,
+    group: 'chart',
+  },
+
+  padding: {
+    type: 'number',
+    label: 'Padding Bars',
+    default: 1,
+    group: 'chart',
+  },
+  sortBarsBy: {
+    type: 'text',
+    label: 'Sort bars by',
+    group: 'chart',
+    options: [
+      { label: 'Size (descending)', value: 'totalDescending' },
+      { label: 'Size (ascending)', value: 'totalAscending' },
+      { label: 'Name', value: 'name' },
+      { label: 'Original', value: 'original' },
+    ],
+    default: 'original',
+  },
+
+  //AXIS
   labelLeftRotation: {
     type: 'number',
     label: 'Left tick label rotation',
@@ -80,67 +136,12 @@ export const visualOptions = {
     group: 'axis',
   },
 
-  marginTop: {
-    type: 'number',
-    label: 'Margin (top)',
-    default: 50,
-    group: 'artboard',
-  },
-
-  marginRight: {
-    type: 'number',
-    label: 'Margin (right)',
-    default: 50,
-    group: 'artboard',
-  },
-
-  marginBottom: {
-    type: 'number',
-    label: 'Margin (bottom)',
-    default: 50,
-    group: 'artboard',
-  },
-
-  marginLeft: {
-    type: 'number',
-    label: 'Margin (left)',
-    default: 50,
-    group: 'artboard',
-  },
-
-  //chart
-  spaceCommonAxis: {
-    type: 'number',
-    label: 'Space for common axis',
-    default: 100,
-    group: 'chart',
-  },
-
-  padding: {
-    type: 'number',
-    label: 'Padding Bars',
-    default: 1,
-    group: 'chart',
-  },
-
-  sortBarsBy: {
-    type: 'text',
-    label: 'Sort bars by',
-    group: 'chart',
-    options: [
-      { label: 'Size (descending)', value: 'totalDescending' },
-      { label: 'Size (ascending)', value: 'totalAscending' },
-      { label: 'Name', value: 'name' },
-      { label: 'Original', value: 'original' },
-    ],
-    default: 'original',
-  },
-
-  colorScale1: {
+  
+  //COLOR
+  colorScaleBlue: {
     type: 'colorScale',
-    label: 'Color left axis',
-    dimension: 'x1',
-    dimensionId: 'x1',
+    label: 'Color scale',
+    dimension: 'left',
     default: {
       scaleType: 'sequential',
       interpolator: 'interpolateBlues',
@@ -148,11 +149,10 @@ export const visualOptions = {
     group: 'color',
   },
 
-  colorScale2: {
+  colorScaleRed: {
     type: 'colorScale',
-    label: 'Color right axis',
-    dimension: 'x2',
-    dimensionId: 'x2',
+    label: 'Color scale',
+    dimension: 'right',
     default: {
       scaleType: 'sequential',
       interpolator: 'interpolateReds',
