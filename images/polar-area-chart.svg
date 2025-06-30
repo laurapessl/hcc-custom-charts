@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="Arial" viewBox="0 0 854 600"
     preserveAspectRatio="xMidYMid meet">
-    <rect width="854" height="600" x="0" y="0" fill="#f0f0f0" id="background" />
+    <rect width="854" height="600" x="0" y="0" fill="#ffffff" id="background" />
     <g transform="translate(400.5,308)" id="viz">
         <path d="M-1.45,-4.981A5.188,5.188,0,0,1,1.235,-5.039L0,0Z" fill="#9aced5" />
         <path d="M-3.241,-11.138A11.6,11.6,0,0,1,2.762,-11.267L0,0Z" fill="#252626" />

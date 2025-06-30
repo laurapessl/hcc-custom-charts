@@ -10,13 +10,17 @@ A paired bar chart displays two related data sets side by side for direct compar
 
 ## Data
 
-The recommended dataset for this chart is `population-austria.csv`. This dataset compares the number of men and women in Austria by age group.
+The recommended datasets for this chart are `population-austria.csv` and `co2-emissions.csv`. The first dataset compares the number of men and women in Austria by age group. The second dataset contains the CO2 emissions per continent in 2021 and 2022.
 
 Since a paired bar chart usually visualizes different groups, it is recommended to use different color families for each side.
 
-In RAWGraphs, choose the following data mapping:
+In RAWGraphs, choose the following data mappings:
 
-<img src="images/pairedbarchart-mapping.png" alt="Chart" width="800"/>
+First dataset
+<img src="images/paired-bar-chart-mapping.png" alt="Chart" width="800"/>
+
+Second dataset
+<img src="images/paired-bar-chart-mapping2.png" alt="Chart" width="800"/>
 
 # Bullet Chart
 
@@ -39,11 +43,16 @@ A connected scatter plot shows the evolution of a value over time with a connect
 
 ## Data
 
-The recommended dataset for this chart is `cereal.csv`. This dataset shows the number of customer complaints grouped by issue type.
+The recommended datasets for this chart are `cereal.csv` and `unemployment-rate.csv`. The first dataset shows the number of customer complaints grouped by issue type. The second dataset contains the unemployment rate in the US from 2015 to 2025.
 
 In RAWGraphs, choose the following data mapping:
 
-# Todo
+First dataset:
+
+<img src="images/scatterplot-mapping.png" alt="Chart" width="600"/>
+
+Second dataset:
+<img src="images/scatterplot-mapping2.png" alt="Chart" width="600"/>
 
 # Pareto Chart
 
@@ -53,11 +62,16 @@ A Pareto chart is a combination of a bar chart and a line graph. The line shows 
 
 ## Data
 
-The recommended dataset for this chart is `complaints.csv`. This dataset shows the number of customer complaints grouped by issue type.
+The recommended datasets for this chart area `complaints.csv` and `km.csv`. The first dataset shows the number of customer complaints grouped by issue type. The second dataset shows the average kilometers per hour for different transportation methods.
 
 In RAWGraphs, choose the following data mapping:
 
-<img src="images/pareto-mapping.png" alt="Chart" width="600"/>
+First dataset:
+
+<img src="images/pareto-chart-mapping.png" alt="Chart" width="600"/>
+
+Second dataset:
+<img src="images/pareto-chart-mapping2.png" alt="Chart" width="600"/>
 
 # Polar Area Chart
 
@@ -68,11 +82,16 @@ A polar area chart displays data similar to a pie chart where each segment repre
 
 ## Data
 
-The recommended dataset for this chart is `nightingale.csv`. This is Florence Nightingale's original dataset, that shows the causes of mortality in the army in the east from 1854 to 1855.
+The recommended datasets for this charts are `nightingale.csv` and `master-studies.csv`. The first datset is Florence Nightingale's original dataset, that shows the causes of mortality in the army in the east from 1854 to 1855. The second dataset shows the number finished studies between 2013 and 2025.
 
 In RAWGraphs, choose the following data mapping:
 
-<img src="images/polar-area-chart-mapping.png" alt="Chart" width="600"/>
+First dataset:
+
+<img src="images/polar-area-mapping.png" alt="Chart" width="600"/>
+
+Second dataset:
+<img src="images/polar-area-mapping2.png" alt="Chart" width="600"/>
 
 # Similarity Map
 
@@ -82,10 +101,15 @@ A similarity map is a visual representation that places similar items closer tog
 
 ## Data
 
-The recommended dataset for this chart is `cereals.csv`. This dataset shows how many different nutritions like protein, fat, sodium etc. cereals contain.
+The recommended datasets for this chart are `cereals.csv` and `iris.csv`. The first dataset shows how many different nutritions like protein, fat, sodium etc. cereals contain. The second dataset is about different of iris' and their properties like sepal witdh and length.
 
 In RAWGraphs, choose the following data mapping:
 
-<img src="images/similaritymap-mapping.png" alt="Chart" width="600"/>
+First dataset:
+
+<img src="images/similarity-mapping.png" alt="Chart" width="600"/>
+
+Second dataset:
+<img src="images/similarity-mapping2.png" alt="Chart" width="600"/>
 
 Feel free to swap the dimensions to the ones you are interested in. In the `Customize` section of RAWGraphs under `Dimensionality Reduction` you can choose one of three reduction methods which are PCA, UMAP, t-SNE and FDP.

@@ -123,6 +123,8 @@ const svg = d3Select(svgNode)
     monthData.reduce((acc, d) => acc + (d.value ?? 0), 0)
   );
 
+  const maxValue = d3Max(data, d => d.value ?? 0);
+
   const allCategoryTotals = d3Rollups(
     data,
     v => d3Sum(v, d => d.value),
@@ -195,8 +197,8 @@ const svg = d3Select(svgNode)
 
     const sqrtMax = Math.sqrt(maxTotal);
 
-    slice.highestValue = 350;
-    slice.outerR = (radius * Math.sqrt(350)) / sqrtMax;
+    slice.highestValue = Math.floor(maxValue / 6);
+    slice.outerR = (radius * Math.sqrt(slice.highestValue)) / sqrtMax;
 
     entries.forEach(d => {
       const outerR = (radius * Math.sqrt(d.value)) / sqrtMax;
@@ -357,47 +359,43 @@ const svg = d3Select(svgNode)
       const legendLayer = d3Select(svgNode)
         .append('g')
         .attr('id', 'legend')
-        .attr('transform', `translate(${width - legendWidth - 20},${(height - legendHeight) / 2})`);
+        .attr('transform', `translate(${width - legendWidth - 10},${(height - legendHeight) / 2})`);
 
       legendLayer.raise()  
     
-      const categoryKey = mapping.category?.value.trim().toLowerCase();
-      console.log("CategoryKey = ", categoryKey);
-    
-      if (categoryKey) {
-        const categoryValues = Array.from(
-          new Set(
-            data
-              .map(d => d[categoryKey]?.toString().trim())
-              .filter(d => d != null && d !== '')
-          )
-        );
+      
+      const categoryValues = Array.from(
+        new Set(
+          data
+            .map(d => d['category']?.toString().trim())
+            .filter(d => d != null && d !== '')
+        )
+      );
 
-        console.log('categoryValues:', categoryValues);
-    
-        const legendItemHeight = 20;
-        const legendItemSpacing = 5;
-    
-        const legendItems = legendLayer.selectAll('g.legend-item')
-          .data(categoryValues)
-          .enter()
-          .append('g')
-          .attr('class', 'legend-item')
-          .attr('transform', (d, i) => `translate(0, ${i * (legendItemHeight + legendItemSpacing)})`);
-    
-        legendItems.append('rect')
-          .attr('width', 18)
-          .attr('height', 18)
-          .attr('fill', d => {console.log(d); return colorScale(" " + d)} );
-    
-        legendItems.append('text')
-          .attr('x', 24)
-          .attr('y', 9)
-          .attr('dy', '0.35em')
-          .text(d => d)
-          .style('font-size', '12')
-          .style('fill', '#000');
-      }
+      console.log('categoryValues:', categoryValues);
+  
+      const legendItemHeight = 20;
+      const legendItemSpacing = 5;
+  
+      const legendItems = legendLayer.selectAll('g.legend-item')
+        .data(categoryValues)
+        .enter()
+        .append('g')
+        .attr('class', 'legend-item')
+        .attr('transform', (d, i) => `translate(0, ${i * (legendItemHeight + legendItemSpacing)})`);
+  
+      legendItems.append('rect')
+        .attr('width', 18)
+        .attr('height', 18)
+        .attr('fill', d => {console.log(d); return colorScale(d)} );
+  
+      legendItems.append('text')
+        .attr('x', 24)
+        .attr('y', 9)
+        .attr('dy', '0.35em')
+        .text(d => d)
+        .style('font-size', '12')
+        .style('fill', '#000');
     }
     
     
