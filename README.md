@@ -1,10 +1,28 @@
-# IVIS - G1 - HCC Custom Charts for RAWGraphs
 
-Vera Tysheva, Bastian Kandlbauer, Laura Pessl
+# HCC Custom Charts for RAWGraphs
 
-(based on the previous work of Aumüller Thomas, Heider Martin, Ramadan Abdelrahman)
+HCC Custom Charts are a suite of custom charts built for
+integration into RAWGraphs.
 
-# Getting started
+Built by Vera Tysheva, Bastian Kandlbauer, and Laura Pessl as part of
+the course Information Visualisation SS 2025, based on the previous
+work of Thomas Aumüller, Martin Heider, and Abdelrahman Ramadan.
+
+
+## Chart Types
+
+- Paired Bar Chart
+- Bullet Chart
+- Connected Scatter Plot
+- Pareto Chart
+- Polar Area Chart
+- Similarity Map
+
+The charts are described in a separate document
+[Descriptions.md](Descriptions.md).
+
+
+## Getting Started
 
 1. Clone the git repository:
    ```
@@ -18,8 +36,9 @@ Vera Tysheva, Bastian Kandlbauer, Laura Pessl
    ```
    yarn install
    ```
-   
-# Create a Bundle for RAWGraphs
+
+
+## Create a Bundle for RAWGraphs
 
 If you are satisfied with your project, you can build the JavaScript bundle to be used in the RAWGraphs interface.
 
@@ -49,7 +68,8 @@ If you are satisfied with your project, you can build the JavaScript bundle to b
 
    Those files can now be loaded with RAWGraphs.
 
-# Upload the bundle to RAWGraphs
+
+## Upload the bundle to RAWGraphs
 
 The following steps can be executed on the local RAWGraphs app, as well as on https://app.rawgraphs.io.
 
@@ -68,9 +88,11 @@ The following steps can be executed on the local RAWGraphs app, as well as on ht
 
 ![select your file](images/addcustomchart.png)
 
-# Run the project
 
-## Recommended: Run project locally with the RAWGraphs app
+## Running the Project Locally
+
+A local RAWGraphs instance can be started to try out the
+HCC Custom Charts.
 
 ### Create Link
 
@@ -88,7 +110,7 @@ The following steps can be executed on the local RAWGraphs app, as well as on ht
    yarn link
    ```
 
-### RawGraphs App
+### Build RawGraphs App
 
 1. Clone the git repository:
 
@@ -119,7 +141,11 @@ The following steps can be executed on the local RAWGraphs app, as well as on ht
    yarn run start
    ```
 
-## Sandbox Environment
+
+## Running the Sandbox Environment
+
+The Sandbox is an alternative to integrating custon charts into a
+RAWGraphs instance, but with some limitations.
 
 1. Clone the git repository:
    ```
@@ -140,9 +166,9 @@ The following steps can be executed on the local RAWGraphs app, as well as on ht
 
 ---
 
-# Troubleshooting
+## Troubleshooting
 
-## Probems with `yarn install`
+### Probems with `yarn install`
 
 If you get the error `error @testing-library/dom@10.4.0: The engine "node" is incompatible with this module. Expected version ">=18". Got "16.20.2"` try installing a newer version (>= 18) of node the following:
 
@@ -164,17 +190,20 @@ JSON-based format that allows users to save and later reload their projects.
 - Customizations
   - Any custom settings or styles applied to the visualization.
 
+
 ## Tutorial
 
 A small tutorial can be found [here](tutorial/tutorial.md) in the folder `tutorial/tutorial.md`
+
 
 ## Contribute
 
 If you'd like to contribute, follow the RAWGraphs [custom template guide](https://github.com/rawgraphs/custom-rawcharts-template).
 
+
 ## Credits
 
-Supervisor: [@kandrews99](https://github.com/kandrews99).
+Supervisor: Keith Andrews [@kandrews99](https://github.com/kandrews99).
 
 Based on GitHub Repository [https://github.com/solidth/RAWGraphs-Custom-Charts](https://github.com/solidth/RAWGraphs-Custom-Charts) by [@solidth](https://github.com/solidth), [@hezojez](https://github.com/hezojez) and [@Ramadan877](https://github.com/Ramadan877).
 
